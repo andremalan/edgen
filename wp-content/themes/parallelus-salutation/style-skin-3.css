@@ -1,0 +1,934 @@
+/*
+	Skin Name: Skin 3 (ideahack)
+*/
+
+body 							{ color: #414b52; }				/* Primary Text color */
+body, #Top #PageTop .inner-1 	{ background-color: #F2F0F0; }	/* Body Background color */
+#Wrapper						{ border-top-color: #00A651; background: url("/wp-content/uploads/2011/10/background.jpg") no-repeat scroll center top #EEDEC1; }	/* Top edge border color */
+#Top							{ background: transparent; }		/* Header background color */
+#Middle .theContent .inner-1	{ background-color: #faf9f9; }	/* Content "page" area background color*/
+#Bottom .theContent				{ background-color: #414b52; 	/* Footer background color */
+								  color: #a0a5a9; }				/* Footer text color */
+
+/*  Links colors */
+a, a:link, a:visited, #BP-Content .activity-header-info .activity-action a.view, #BP-Content .activity-header-info .activity-action a.delete-activity			{ color: #d95b44; } /* links - default color */
+a:hover, a:active, #BP-Content .activity-header-info .activity-action a:hover.view, #BP-Content .activity-header-info .activity-action a:hover.delete-activity	{ color: #676666; } /* links - hover color */
+
+	a.boxLink, a.boxLink:link, a.boxLink:visited, #BP-Content .generic-button a:link, #BP-Content .generic-button a:visited		{ color: #fff; background-color: #d95b44; } /* box link (has bg color) */
+	a.boxLink:hover, a.boxLink:active, #BP-Content .generic-button a:hover, #BP-Content .generic-button a:active				{ background-color: #676666; } 				/* box link - hover */
+	
+	#Bottom footer a, #Bottom footer a:active, #Bottom footer a:visited { color: #dae0e5; }	/* footer links */
+	#Bottom footer a:hover 												{ color: #fff; }	/* footer links - hover */
+
+/* TopPanel - slide open top */
+#TopPanel .topPanelSection, #TopPanel ul.section-tabs li a.sectionTab							{ background-color: #CE4135; }	/* default tab color */
+#TopPanel .topPanelSection.primary-tab, #TopPanel ul.section-tabs li a.sectionTab.primary-tab	{ background-color: #CE4135; }	/* match #Wrapper border color (line 8). D95B44 */
+	#TopPanel .topPanelSection				{ color: #fff;}						/* text color */
+		.rgba #TopPanel .topPanelSection	{ color: rgba(255,255,255,.6); }	/* text color (modern browsers) */
+	#TopPanel .topPanelSection a:link, #TopPanel .topPanelSection a:visited	{ color: #fff; text-decoration: underline; } 		/* link */
+	#TopPanel .topPanelSection a:hover, #TopPanel .topPanelSection a:active	{ color: #fff; } 									/* hover */
+		.rgba #TopPanel .topPanelSection a:link, .rgba #TopPanel .topPanelSection a:visited	{ color: rgba(255,255,255,.9);  }	/* link (modern browsers) */
+		.rgba #TopPanel .topPanelSection a:hover, .rgba #TopPanel .topPanelSection a:active	{ color: rgba(255,255,255,1); }	/* hover (modern browsers) */
+
+/* Main Menu (also effects admin bar) */
+#MainMenu .slideMenu ul li a:link, #MainMenu .slideMenu ul li a:visited,
+body #wp-admin-bar ul li ul li a:link, body #wp-admin-bar ul li ul li a:visited,
+
+
+/*
+body #wp-admin-bar ul li ul li:hover ul li a:link, body #wp-admin-bar ul li ul li:hover ul li a:visited	
+
+{ color: #414b52; background: #a90329; background: -moz-linear-gradient(center top , #CE4135, #BC2A21) repeat scroll 0 0 transparent;} /*..ideahack STILL NEEDS EVERYTHING BUT MOZ.............. link color
+
+#MainMenu .slideMenu ul li a:hover, body #wp-admin-bar ul li ul li a:hover,
+body #wp-admin-bar ul li ul li:hover ul li a:hover														
+
+{ color: #d95b44; background: -moz-linear-gradient(center top , #d95d51, #c1342b) repeat scroll 0 0 transparent; } ..ideahack STILL NEEDS EVERYTHING BUT MOZ.............. hover color */
+
+
+
+
+.slideMenu > ul > li > a:hover, .slideMenu > ul > li > a.hover,
+#MainMenu .slideMenu ul li ul.sub-menu, body #wp-admin-bar ul li ul,
+body #wp-admin-bar ul.main-nav li:hover, body #wp-admin-bar ul.main-nav li.sfhover						{ background-color: #fff;} /*........ hover background */
+#MainMenu .slideMenu ul li ul.sub-menu li a 															{ border-top-color: #F2F0F0; }	/* sub-menu - divider borders
+	 /* top level links only */
+	#MainMenu .slideMenu > ul > li > a:link, #MainMenu .slideMenu > ul > li > a:visited					{ color: #72787d; } /*................ top level links - color */
+
+/* Slide Show (paging links) */
+.slideShowPager a				{ border-bottom-color: #cecccc; }	/* color - default state */
+.slideShowPager a.activeSlide	{ border-bottom-color: #9c9a9a; }	/* color - active */
+.slideShowPager a:hover			{ border-bottom-color: #d95b44; }	/* color - hover */
+
+/* Headings and Titles */
+h1, h2, h3, h4, h5, h6, .cta-title, .posts-list .entry-title a, #Comments .poster-name a, #BP-Content .item-list .item-title a, #BP-Content .forum .item-title a, #BP-Content .item-list .item-content-container .poster-name a, #BP-Content .item-list .item-container .poster-name a, #BP-Content #item-header-content .entry-title a, .bp-content-tabs ul, .bp-content-tabs li a, .bp-content-tabs li a.active, .bp-content-tabs li.selected a, .bp-content-tabs li a.active, .bp-content-tabs li.current a, #BP-Content ul.activity-list .activity-comments .acomment-meta > a:first-child, .widget ul.item-list li .item-title a
+	{ color: #414b52; } /* text color */
+	
+	/* emphasis/highlight color */
+	h1 em, h2 em, h3 em, h4 em, h5 em, h6 em { color: #39748f; } 
+	/*Top "slide down" Headings */
+	#TopPanel .topPanelSection h1, #TopPanel .topPanelSection h2, #TopPanel .topPanelSection h3, #TopPanel .topPanelSection h4, #TopPanel .topPanelSection h5, #TopPanel .topPanelSection h6 { color: #fff; }
+	/* footer headings */
+	#Bottom footer h1, #Bottom footer h2, #Bottom footer h3, #Bottom footer h4, #Bottom footer h5, #Bottom footer h6 { color: #fff;}
+
+/* Dividers and Lines */
+hr, #Comments li ul.children, #BP-Content .register-section, #BP-Content .create-form { border-color: #e7e6e6; }
+
+/* Boxes and Containers */
+.pull-quote { border-color: #cecccc; }
+
+/* Forms and inputs */
+textarea, input[type="text"], input[type="password"], input[type="file"], .textInput,
+#BP-Container div#BP-Content form textarea, .field_type_captcha img { 
+	color: #000; 
+	background-color: #f0efef;
+	border-color: #c9c9c9 #d9d9d9 #e8e8e8; }
+	/* Header inputs (because it has a different bg color) */ 	
+	.PageTop textarea, .PageTop input[type="text"], .PageTop input[type="password"], .PageTop input[type="file"] {
+		background-color: #e9e7e7; border-color: #c4c2c2 #d3d1d1 #e2e0e0; }
+	/* For modern browsers */ 	
+	.rgba textarea, .rgba input[type="text"], .rgba input[type="password"], .rgba input[type="file"],
+	.rgba #BP-Container div#BP-Content form textarea, .rgba .field_type_captcha img {
+		background-color: rgba(0, 0, 0, .039); border-color: rgba(0, 0, 0, .19) rgba(0, 0, 0, .13) rgba(0, 0, 0, .07); }
+	/* hover, focus, error states */
+	textarea:hover, input[type="text"]:hover, input[type="password"]:hover, input[type="file"]:hover, 
+	.textInput:hover, .textInput.inputHover, #BP-Container div#BP-Content form textarea:hover 			{ border-color: #c9c9c9; } /*........................ hover */ 
+	textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="file"]:focus, 
+	.textInput:focus, .textInput.inputFocus, #BP-Container div#BP-Content form textarea:focus 			{ background-color: #fff; border-color: #ecada2; } /* focus */
+	textarea.error, input.error[type="text"], input.error[type="password"], input.error[type="file"], 
+	.textInput.error, .textInput.error, #BP-Container div#BP-Content form textarea.error 				{ border-color: #c00; } /*........................... error */
+	textarea.error:focus, input.error[type="text"]:focus, input.error[type="password"]:focus, input.error[type="file"]:focus, 
+	.textInput.error:focus, .textInput.error.inputFocus, #BP-Container div#BP-Content form textarea.error:focus { border-color: #c00; } /*................... error - active */
+	.publicContactForm em.error, #BP-Content .error { color: #c00; }
+
+/* Buttons (also includes BP sub-nav - flter, etc. appearing below tabs)*/
+.btn, a.btn:link, a.btn:visited, #BP-Content div.item-list-tabs#subnav, #BP-Content div.messages-options-nav, #BP-Content div.item-list-tabs#subnav ul li a, #BP-Content div.messages-options-nav a, body #wp-admin-bar .padder, body #wp-admin-bar ul li a, body #admin-bar-logo {
+	color: #444343; /* text (color) */
+	border-color: #c5c3c3 #bab8b8 #aeaaaa;	/* border color */
+ 	background: #d2cfcf;					/* background color (gradient) */
+	background: -webkit-gradient(linear, left top, left bottom, from(#dfdddd), to(#c6c2c2));
+	background: -moz-linear-gradient(top, #dfdddd,  #c6c2c2);
+	background: linear-gradient(#dfdddd, #c6c2c2); }
+	
+	/* Button hover styles */
+	.btn:hover, a.btn:hover, #BP-Content div.item-list-tabs#subnav ul li a:hover, #BP-Content div.messages-options-nav a:hover {
+		color: #444343; /* text (color) */
+		border-color: #bbb9b9 #b1afaf #a5a1a1;	/* border color */
+		background: #e1dede;					/* background color (gradient) */
+		background: -webkit-gradient(linear, left top, left bottom, from(#ecebeb), to(#cfcccc));
+		background: -moz-linear-gradient(top, #ecebeb,  #cfcccc);
+		background: linear-gradient(#ecebeb, #cfcccc); }
+
+	/* BuddyPress sub-nav and WP Admin Bar */
+	#BP-Content div.item-list-tabs#subnav, #BP-Content div.messages-options-nav, body #wp-admin-bar .padder { /* Set in ".btn" styles (above)*/ }
+	#BP-Content div.item-list-tabs#subnav ul li a, #BP-Content div.messages-options-nav a, body #wp-admin-bar ul li a, body #admin-bar-logo { 
+		/* Set in ".btn" styles (above)*/
+		background: transparent; /* <-- override link bg because it's applied to container instead */ }
+	#BP-Content div.item-list-tabs#subnav ul li a:hover, #BP-Content div.messages-options-nav a:hover { /* Set in ".btn" styles (above) */ }
+
+/* Tabs */
+.tabs										{ border-color: #e7e6e6; }		/* inactive tab & top edge of content area */
+.tabs a, .bp-content-tabs li a				{ background-color: #e7e6e6; }	/* inactive tab bg */
+.tabs a:hover, .bp-content-tabs li a:hover	{ background-color: #fdfcfc; }	/* inactive tab - hover */
+.tabs a.active, .tabs a.active:hover		{ background-color: #fff; border-color: #fff; border-bottom-color: #fff; }	/* active tab */
+.tab 										{ background: #fff; border-color: #fff; } /* content area */
+
+	/* BuddyPress specific tabs */
+	.bp-content-tabs ul, .bp-content-tabs li a, 
+	.bp-content-tabs li a.active, .bp-content-tabs li.selected a,
+	.bp-content-tabs li a.active, .bp-content-tabs li.current a		{ border-color: #cecccc; }		/* inactive tab & top edge of content area */
+	.bp-content-tabs li a.active, .bp-content-tabs li.selected a, .bp-content-tabs li a.active, .bp-content-tabs li.current a { 
+		background-color: #faf9f9; border-bottom-color: #faf9f9; }	/* active tab */
+
+/* toggle content */
+.toggleItem				{ border-color: #fff; }
+.toggleItem .togTitle	{ background-color: #fff; }
+.toggleItem .togDesc	{ background-color: #fff; border-top-color: #e8e8e8; }
+
+/* pricing tables */
+.price-column { background-color: #f7f5f5; border-bottom-color: #cecccc; }
+	.price-table .even-column						{ background-color: #fefcfc; }
+	.price-table .highlight-column 					{ background-color: #fff; }
+	.price-column .column-title 					{ background-color: #cecccc; }
+	.price-table .highlight-column .column-title	{ color: #fff; background-color: #39748f; }
+	.price-table .highlight-column .price-info		{ color: #39748f; }
+
+/* Item container (default containers for posts lists, portfolio items, quotes, etc...) */
+.item-container, .messageBox, .pagination, .nextPageLinks p, .widget ul.item-list li, .styled-image, .styled-slideshow, 
+.gallery .gallery-icon a, .widget_bp_core_recently_active_widget .avatar-block, .widget_bp_core_whos_online_widget .avatar-block { background-color: #fff; }
+
+/* Post list titles (hover color) */
+.posts-list .entry-title a:hover, #Comments .poster-name a:hover, #BP-Content .item-list .item-title a:hover, #BP-Content .forum .item-title a:hover, #BP-Content .item-list .item-container .poster-name a:hover, #BP-Content .item-list .item-content-container .poster-name a:hover, #BP-Content #item-header-content .entry-title a:hover, #BP-Content ul.activity-list .activity-comments .acomment-meta > a:first-child:hover	{ 
+	color: #d95b44; }
+	/* alternate hover color (if containers color changes) */
+	.widget ul.item-list li.hover .item-title a		{ color: #fff; }
+
+/* post info (the meta data, such as categories, comments, tags, date, etc, found in blog post lists) */
+.post-header-info, .post-header-info .author, .post-header-info .published,  .post-header-info .meta-sep, .post-footer-info .tag-links, #Comments .date, .messageBox.quote cite.quote_author, .post-header-info .cat-links a, .post-header-info .author a, .post-footer-info .tag-links a, #BP-Content .my-activity, #BP-Content .item-header .activity, #BP-Content .activity-header-info, #BP-Content .thread-group a, #BP-Content .thread-history, #BP-Content .item-list .date, #BP-Content .activity-header-info .activity-action a, .widget ul.item-list .item-meta { 
+	color: #a0a5a9; }
+	.post-header-info .cat-links a:hover, .post-header-info .author a:hover, .post-footer-info .tag-links a:hover, #BP-Content .thread-group a:hover, #BP-Content .activity-header-info .activity-action a:hover { 
+		color: #6f7375; } /* meta data - hover color */
+
+	/* hover container - meta data text color (some containers change bg color on hover, this adjusts the font color of the meta data when the bg color changes) */
+	.widget ul.item-list li.hover .item-meta { color: #ecada2; }
+
+/* WP widget styles (BP Widget styles at end of file) */
+#Middle .widgetTitle, .sectionTitle	{ border-bottom-color: #cecccc; }	/* title underline color */
+
+/* Pageination */
+.pagination a 								{ color: #bbb; }	/* link color */
+.pagination a:hover, .pagination a:active	{ color: #000; }	/* hover color */
+.pagination a.current						{ color: #616060; background: #f2f0f0;}	/* active page color */
+
+/* BuddyPress Activity */
+#BP-Content .activity-list .activity-action .view, #BP-Content .activity-list .activity-action .delete-activity, #BP-Content .activity-list .fav, #BP-Content .activity-list .unfav, #BP-Content .activity-list .acomment-reply  {
+	border-color: #dce3e8; } /* separator lines between links  */
+#BP-Content ul.activity-list li div.activity-inreplyto		{ background-color: #f2f0f0; }	/* bottom of BP activity replies */
+#BP-Content ul.activity-list li div.activity-comments ul li	{ border-color: #f2f0f0; }		/* BP activity nested comments - separator border between replies */
+
+/* BuddyPress Messages */
+#BP-Content #message-threads tr.unread td { background-color: #fff; }
+
+/* BuddyPress Forums */
+#BP-Content ul.forum-list li { border-bottom-color: #f2f0f0; }
+
+/* BuddyPress Widgets (BP) */
+.widget .item-options				{ color: #cecccc; }									/* link - color (for BP widgets with AJAX links at top) */
+.widget .item-options a.selected	{ color: #414b52; border-bottom-color: #d95b44; }	/* link - selected AJAX option */
+.widget ul.item-list li.hover		{ background-color: #d95b44; }						/* item hover - color of background container when hovering */
+
+#headerWrapper {
+	background: transparent !important;
+}
+
+
+/*donation widget */
+
+.donation_form {
+	width: 400px;
+	float: right;
+}
+
+/*sitewide activity styling*/
+
+div.swa-activity-meta {
+	display: none;
+}
+
+#twitter_icon {
+    background: url(img/icon-twitter.gif) no-repeat left bottom;
+ 	width: 50px;
+    height: 50px;
+    float: left;
+    padding-right: 20px;
+    padding-top: 8px;
+}
+
+.timesince {margin-left:6px;}
+
+#twitter_content a {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+}
+
+.swa-activity-list .swa-activity-header a:first-child, span.highlight {
+	background: none !important;
+	border: none !important;
+	border-radius: 0 0 0 0 !important;
+}
+
+div.swa-pagination #activity-count {
+	display: none !important;
+}
+
+.swa-wrap div.swa-pagination {
+	display: none;
+}
+
+/* Slideshow */
+.slideShowPager a{
+	height: 100px;
+	width: 100px;
+	background-color: none;
+	border: none;
+	margin: 10px;
+}
+
+.slideShowPager a.activeSlide{
+	height: 100px;
+	width: 100px;
+	background: none;
+	border: none;
+}
+
+.home-page .swa-activity-inner {
+	display: none;
+}
+
+/* About US Page*/
+
+.ugc p {
+	line-height: 25px;
+	padding-left: 2px;
+	padding-right: 40px;
+	font-size: 13px;
+}
+
+/* Team page*/
+
+div.messageBox.quote cite.quote_author {
+	font-size: 14px;
+	margin-left: 5px;
+}
+
+/**/
+#groups-personal-li { display: none; }
+#activity-groups-personal-li { display: none; }
+
+/* FAQ tabs */
+.ugc ul li, .ugc ol li {font-size:13px;}
+
+/* The Slider */
+#featured_image{
+	float:left; 
+	width:300px;
+	margin-top: 15px;
+}
+
+.featured_content{
+	float: right;
+	width:600px;
+	color: #f8f8f8;
+	font-size: 16px;
+	margin-top: 20px;
+}
+
+.slide {
+	background-color: #00a651;
+	background: url(/wp-content/uploads/2011/10/blue-bg.png); /*http://edgen.evometrix.com/wp-content/uploads/2011/10/blue-bg.png*/
+}
+
+#donate {
+	float:left;
+	margin-top: 5px;
+}
+
+#donate .btn {
+	font-size: 16px;
+}
+
+.home-page #Middle .contentMargin {
+	margin-top: 148px;
+}
+
+.slideShowPager{
+	margin: 13px;
+	margin-left: 65px;
+}
+
+#Middle .widgetTitle, #Bottom .widgetTitle, .sectionTitle {
+	border-bottom: none;
+}
+
+/* Student (products) page */
+
+div.wpsc_product_search {
+	background: transparent !important;
+	border: none !important;
+}
+
+#wpsc-main-search .wpsc-products-view-mode a {
+	display: none !important;
+}
+
+.wpsc-products-sort {
+	display: none !important;
+}
+
+
+div.wpsc_product_search {
+	display: none;
+}
+
+div.wpsc_product_search #wpsc_search_autocomplete {
+	float: left !important;
+}
+
+
+div.wpsc_product_search #wpsc_search_autocomplete {
+	display: none;
+}
+
+.searchform-label {
+	padding-right: 15px;
+	width: 45%;
+	margin-bottom: 4px;
+}
+
+
+.searchform-controls {
+	clear: none;
+}
+
+.TextField {
+	float: left;
+}
+
+.DropDownField {
+	float: left;
+} 
+
+
+#sidebar .searchform-input-wrapper input, .searchform-input-wrapper input, .searchform-input-wrapper select {
+	width: 135%;
+}
+
+.searchform-controls .btn {
+    font-size: 17px;
+    margin-top: 8px;
+    margin-right: 22px;
+}
+
+
+/*product display (on the student page)*/
+.default_product_display {
+	background-color: #0083CA;
+	box-shadow: 2px 2px 3px #888;
+	padding: 25px !important;
+}
+
+.default_product_display h2 a {
+	color: #fff;
+	margin-bottom:15px;
+}
+
+
+.default_product_display h2.prodtitle, #content .default_product_display h2.prodtitle {
+	margin-bottom: 15px !important;
+}
+
+
+
+#studentmeta {
+    color: #F3F3F3;
+    float: left;
+    font-size: 15px;
+    line-height: 20px;
+    margin-left: 10px;
+    margin-top: 11px;
+    width: 230px;
+}
+
+.wpsc_product_price {
+	display: none !important;
+}
+
+#desctext {
+	    float: left;
+	    font-size: 13px;
+	    line-height: 25px;
+	    padding-left: 15px;
+	    padding-right: 10px;
+	    width: 335px;
+		color: #F3F3F3; 
+		margin-top: 15px;
+}
+
+
+
+.default_product_display .wpsc_quantity_update {
+/*	    margin-left: 20px !important;
+	    margin-top: 40px !important;*/
+	}
+	
+/*.default_product_display .wpsc_buy_button_container {margin-top:45px;}
+*/
+
+.default_product_display .wpsc_buy_button_container {float:none !important; margin-bottom: 10px !important; margin-left: 5px !important;}
+
+body.bp-adminbar, body.logged-in {
+    padding-top: 0px !important;
+}
+
+#readstory {
+    color: #f5f5f5;
+    background: #c34135;
+    padding: 8px 14px;
+    box-shadow: 1px 1px 2px #5E5E5E;
+}
+
+
+/* boxes on Get Involved page */
+
+.messageBox.error {font-size: 14px;}
+.messageBox.success {background-color:#00A651; font-size: 14px;}
+.messageBox.info {background-color:#0083ca; font-size: 14px;}
+
+.twitter {float:left;}
+.facebook {float:left;}
+ .rightarrow {float:left;}
+
+
+#involvedshare {
+		color: #F5F5F5;
+	    float: left;
+	    font-size: 17px;
+	    margin-left: 30px;
+	    margin-top: 3px;
+}
+
+.btn.large{font-size:17px !important;}
+
+
+/* user page */
+
+#messages-personal-li {
+    display: none;
+}
+#activity-personal-li {
+    display: none;
+}
+
+#friends-personal-li {
+	display: none; 
+}
+
+
+#BP-Content #item-body form#whats-new-form {
+	display: none;
+}
+
+#activity-stream {
+	display: none;
+}
+
+#BP-Content #settings-form #activity-notification-settings {
+	display: none;
+}
+
+#BP-Content #settings-form #friends-notification-settings {
+	display: none;
+}
+
+#BP-Content #settings-form #groups-notification-settings {
+	display: none;
+}
+
+.latest-update {display: none;}
+
+#post-mention {display: none;}
+#send-private-message {display: none;}
+.friendship-button {display: none;}
+
+
+/* individual student page*/
+
+.custom_meta {
+    line-height: 26px;
+    float: right;
+    background-color: #0083ca;
+    color: #f3f3f3;
+    margin: 15px;
+    padding: 25px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+	box-shadow: 2px 2px 3px #888;
+    margin: 0 15px 30px 30px;
+	width: 260px;	
+}
+
+.product_description {
+	clear: both;
+}
+
+.single_product_display form.product_form input, #content .single_product_display form.product_form input {
+	padding: 6px 12px !important;
+	font-size: 18px!important;
+}
+
+#single_product_page_container .wpsc_quantity_update {
+    margin-right: 140px;
+    margin-top: 15px;
+    margin-bottom: -10px;
+   float: right;
+}
+
+
+/* Top Tabs */
+#TopPanel .ugc ul li, .ugc ol li {
+    float: left;
+    font-size: 17px;
+    margin-right: 50px;
+}
+
+#loginform {
+    margin-top: 15px;
+}
+
+.widget_loginlogout {
+    width: 250px;
+/*    float: left;
+*/}
+
+/* ideahack - this is the top styling for the login form - had to hack it to avoid issues, will need to find a more elegant fix*/
+#loginlogout-3 {
+	float:left;
+	width: 250px;
+}
+
+#text-5 {float:right;}
+#registernow {
+    margin-top: 25px;
+	width: 565px;
+    float: right;
+}
+#wp_sidebarlogin-3 {
+	padding-right:20px;
+}
+#wp_sidebarlogin-3 .login_error {
+	background-color:#058DD6;
+	color: #E3E3E3;
+}
+.blockOverlay {background-color:#0083CA!important;}
+
+
+/* btn impactBtn */
+
+#menu-top-menu  a {
+	/* text (color, etc.) */
+	color: #F3D5D4 !important; 
+	text-transform: uppercase; text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+	/* border color */
+	border-color: #9b3128 #942821 #8d1f19;
+	/* background color (gradient) */
+	background: #C5392F;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ce4135), to(#bc2a21));
+	background: -moz-linear-gradient(top, #ce4135,  #bc2a21);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce4135', endColorstr='#bc2a21');
+	background: linear-gradient(#ce4135, #bc2a21);
+	/* shadows */
+	-webkit-box-shadow:	0 1px 2px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.2); 
+	-moz-box-shadow:	0 1px 2px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.2); 
+	box-shadow:			0 1px 2px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.2);
+	/* */
+	margin-right: 15px;
+    padding: 15px !important;
+}
+
+#menu-top-menu  a:hover {
+color: #F3D5D4;
+/* border color */
+border-color: #9b3128 #942821 #8d1f19;
+/* background color (gradient) */
+background: #CC4940;
+background: -webkit-gradient(linear, left top, left bottom, from(#d95d51), to(#c1342b));
+background: -moz-linear-gradient(top, #d95d51, #c1342b);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d95d51', endColorstr='#c1342b');
+background: linear-gradient(#d95d51, #c1342b);
+/* shadows */
+-webkit-box-shadow:	0 1px 3px rgba(0,0,0,.27), inset 0 1px 0 rgba(255,255,255,.2); 
+-moz-box-shadow:	0 1px 3px rgba(0,0,0,.27), inset 0 1px 0 rgba(255,255,255,.2); 
+box-shadow:			0 1px 3px rgba(0,0,0,.27), inset 0 1px 0 rgba(255,255,255,.2);
+}
+
+
+/* Homepage widget tabs */
+
+.style1 {background: none !important;}
+.tabberlive.style1 {padding: 0px !important; margin-top:10px!important;}
+.style1 ul.tabbernav {font: bold 11px Helvetica,sans-serif !important; text-transform: uppercase !important; width: 280px !important;}
+.style1 ul.tabbernav li a {font-size:11px!important; padding: 10px !important;  border: 1px solid #CCCCCC !important;  background: #0083ca !important; color: #f5f5f5 !important;}
+.style1 ul.tabbernav li.tabberactive a {font-size:11px!important; background: #C5392F !important; color: #f5f5f5 !important; padding: 10px !important;  border: 1px solid #CCCCCC !important;}
+.style1 ul.tabbernav li a:hover {font-size:11px!important; background: #CC4940 !important; color: #f5f5f5 !important; padding: 10px !important;}
+
+/*.style1.tabberlive .tabbertab {
+	background: #C5392F !important;
+	border: 1px solid transparent;
+	margin: 6px 10px 10px !important;
+}*/
+.style1.tabberlive .tabbertab { 
+	padding:10px 25px 10px 12px !important;
+}
+
+.tweets li {
+/*    color: #f5f5f5;
+*/	margin-bottom: 30px;
+    background: url(img/icon-twitter.gif) left center no-repeat;
+    font-size: 11px !important;
+    padding-left: 65px !important;
+}
+
+.tweets li a {color:#fff;}
+.tweets li a:hover {color:#0083ca;}
+
+
+ul.tweets li a {color:#CC4940;}
+
+.tabbertab .wpsc-product-title a {color: #f5f5f5;}
+
+.wpsc-latest-product .wpsc-product-title {
+/*    color: #f5f5f5;
+*/    text-transform: uppercase;
+    float: right;
+}
+
+.tabbertab ul li a {color: BurlyWood;}
+
+.tabbertab p {
+/*    color: #f5f5f5;
+*/}
+
+/* Partner Page */
+
+#partnerlink {
+    font-size:30px;
+}
+#partner p {
+    padding-top: 27px;
+    margin-top: 15px;
+}
+#partner {
+    line-height: 30px;
+    margin-bottom: 45px;
+    background-color: #0083CA;
+    box-shadow: 2px 2px 3px #888888;
+    padding: 25px !important;
+}
+
+#partner {
+    color: #f5f5f5;
+}
+#partnerlink {
+    color: #ddd;
+}
+#partnerlink:hover {
+    color: #fff;
+}
+
+/* checkout box popup */
+
+#fancy_notification {
+    background: none repeat scroll 0 0 #F5F5F5 !important;
+    border: 2px solid #0083CA !important;
+}
+
+#fancy_notification #fancy_notification_content a {
+    float: none !important;
+    margin-bottom: 10px !important;
+    margin-right: 6px !important;
+}
+/* checkout page */
+
+#knc_gift_coupon_wrap {
+	  border: none !important;
+	  padding-top: 40px !important;
+	  padding-left: 0px !important;
+	  clear: both !important;
+}
+
+#knc_gc_cd_form input {margin: 0 23px !important; width: 148px !important;}
+
+tr.knc_coupon_details {
+    border-bottom: 25px solid transparent !important;
+  }
+
+#wpsc_checkout_gravatar {
+    display: none !important;
+}
+
+.adjustform {
+    margin-right: -20px !important;
+    float:right !important;
+}
+
+#checkout_page_container {margin-left: 20px !important;}
+
+#checkout_page_container .btn {
+    margin-left: 25px !important;
+}
+
+#checkout_page_container .total_price td:first-child {padding-left: 0px !important;}
+
+.total_price {
+    font-size: 15px;
+}
+
+.wpsc_email_address label {
+    float: left;
+    margin-right: 10px;
+    margin-top: 0px;
+}
+
+#checkout_page_container .wpsc_make_purchase {
+    bottom: 20px !important;
+    float: left !important;
+    margin-left: -26px !important;
+    margin-top: 30px !important;
+    padding-left: 0px !important;
+    clear: both !important;
+   }
+
+ #donationssidebar {
+    line-height: 25px;
+    margin-right: 15px;
+}
+
+#text-6 {
+	background: #C5392F;
+	padding: 20px;
+	color: #f5f5f5;
+}
+
+#text-6 .widgetTitle {color: #f5f5f5;}
+
+ #questionssidebar {
+    line-height: 25px;
+    margin-right: 15px;
+}
+
+ #questionssidebar h3 a {color: #f5f5f5 !important;}
+
+#text-7 {
+	background: #0083CA;
+	padding: 20px;
+	color: #f5f5f5;
+}
+
+#text-7 .widgetTitle {color: #f5f5f5;}
+
+.btn.impactBtn, a.btn.impactBtn, a.btn.impactBtn:link, a.btn.impactBtn:visited {margin-left: 23px !important;}
+
+#text-8 {
+	background: #00a651;
+	padding: 20px;
+	color: #f5f5f5;
+}
+
+#text-8 .widgetTitle {color: #f5f5f5;}
+
+#text-9 {
+	background: #0083CA;
+	padding: 20px;
+	color: #f5f5f5;
+}
+
+#text-9 .widgetTitle {color: #f5f5f5;}
+
+ #studentssidebar {
+    line-height: 25px;
+}
+
+.activeSlide a {
+    box-shadow: 3px 3px 6px #000 !important;
+}
+
+
+/*checkout page*/
+
+.wpsc_registration_form label {width: 90px !important;}
+#checkout_page_container #wp-submit {margin: 0px !important;}
+.wpsc_signup_text {display:none;}
+
+
+/*students at bottom of profile*/
+
+#donated_students img {
+	margin: 17px;
+	-moz-box-shadow: 1px 2px 4px #333;
+	-webkit-box-shadow: 1px 2px 4px #333;
+	box-shadow: 1px 2px 4px #333;
+
+}
+
+.donatedstudent p {
+    text-align: center;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.donatedstudent {
+    float: left;
+}
+
+/* gift card page */
+
+.product_grid_display .grid_product_info p, #content .product_grid_display .grid_product_info p {display: none;}
+.product_grid_display .grid_view_clearboth {display: none;}
+.product_grid_display {width: 960px;}
+.product_grid_item {width: 190px !important;}
+#grid_view_products_page_container #wpsc-main-search {display: none;}
+.product_grid_item .prodtitle {display: none;}
+
+
+/*  progress bar  */
+
+
+.meter { 
+	height: 20px;  /* Can be anything */
+	position: relative;
+	margin: 20px 0 0 0; /* Just for demo spacing */
+	background: #555;
+	padding: 5px;
+
+}
+.meter > span {
+	display: block;
+	height: 100%;
+
+	background-color: #00A651;
+
+
+	-webkit-box-shadow: 
+	  inset 0 2px 9px  rgba(255,255,255,0.3),
+	  inset 0 -2px 6px rgba(0,0,0,0.4);
+	-moz-box-shadow: 
+	  inset 0 2px 9px  rgba(255,255,255,0.3),
+	  inset 0 -2px 6px rgba(0,0,0,0.4);
+	box-shadow: 
+	  inset 0 2px 9px  rgba(255,255,255,0.3),
+	  inset 0 -2px 6px rgba(0,0,0,0.4);
+	position: relative;
+	overflow: hidden;
+}
+.meter > span:after, .animate > span > span {
+	content: "";
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+
+	background-image: 
+		-moz-linear-gradient(
+		  -45deg, 
+	      rgba(255, 255, 255, .2) 25%, 
+	      transparent 25%, 
+	      transparent 50%, 
+	      rgba(255, 255, 255, .2) 50%, 
+	      rgba(255, 255, 255, .2) 75%, 
+	      transparent 75%, 
+	      transparent
+	   );
+	z-index: 1;
+	-webkit-background-size: 50px 50px;
+	-moz-background-size: 50px 50px;
+	-webkit-animation: move 2s linear infinite;
+
+	overflow: hidden;
+}
+
+#raised{
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#deadline{
+	margin-top: 10px;
+	  font-weight: bold;
+  font-size: 16px;
+	color: #333;
+}
+
+#login h1 a {
+    background: url(http://educationgeneration.org/wp-content/uploads/2011/10/logo.png) no-repeat scroll center top !important;
+    height: 100px !important;
+    width: 375px !important;
+}
+
+

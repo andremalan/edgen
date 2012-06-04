@@ -1,0 +1,4 @@
+<?php 
+add_filter('blog_settings_saved', 'blog_settings_saved_blog_setting');
+function blog_settings_saved_blog_setting ($d) {$d['blog_setting'] = maybe_unserialize('a:17:{s:14:"show_post_date";s:1:"1";s:16:"show_author_name";s:1:"1";s:18:"show_author_avatar";s:1:"1";s:18:"show_comments_link";s:1:"1";s:15:"show_categories";s:1:"1";s:9:"show_tags";s:1:"0";s:15:"blog_show_image";s:1:"1";s:15:"post_show_image";s:1:"0";s:16:"post_image_width";s:3:"687";s:17:"post_image_height";s:3:"250";s:16:"use_post_excerpt";s:1:"1";s:14:"excerpt_length";s:2:"44";s:14:"read_more_text";s:12:"Read more...";s:5:"index";s:12:"blog_setting";s:12:"ancestor_key";s:0:"";s:11:"version_key";s:20:"id_o7pll35a5uj34bzcw";s:10:"import_key";s:0:"";}', true); return $d; }
+?>
