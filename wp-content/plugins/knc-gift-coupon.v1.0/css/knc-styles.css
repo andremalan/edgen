@@ -1,0 +1,36 @@
+/* 
+ * KNC Gift Coupon admin styles 
+ */
+th#cName, th#cValid { text-align:left;}
+th#trash { text-align:center;}
+th#cName { width:250px; }
+th#cValid { width:50px; }
+#coupon_name_list tbody { width: 700px; border-collapse:collapse; }
+#coupon_name_list { width: 700px; }
+ textarea { width:100%; height:200px; }
+.namecol input[type="text"]{ width:250px; }
+.valcol input[type="text"]{ width:50px; }
+.widefat td { vertical-align:middle !important; }
+.trash_td { text-align:center; }
+
+/* 
+ * Tiny MCE styles 
+ */
+.tinyMceStyles {	width:700px;}
+
+/*
+ * Form styles
+ */
+ 
+#knc_gift_coupon_wrap { border:1px solid #e6e6e6; padding:10px; margin:20px 0px;}
+table#knc_coupon_details_table {border:none; border-top:1px solid #f2f2f2; margin-top:20px;width:100%;}
+#knc_gc_cd_loading {display:none; background: url("../images/loading.gif") no-repeat scroll left 9px transparent; float: right; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 12px; height: 20px; margin: 0 10px; padding: 10px 0 0 20px; position: relative; text-align:left; top:-5px; }
+#knc_query_result { display:none; border-bottom: 1px solid #F2F2F2; border-top: 1px solid #F2F2F2; margin:10px 0; padding: 10px 0; }
+tr.knc_coupon_details {border-bottom: 1px solid #F2F2F2;}
+#knc_invalid_coupon_err { margin-top: 10px; display:none; text-align: left; color:#FF0000; }
+#knc_invalid_disc_err { display:none; text-align: right; color:#FF0000;}
+#knc_gc_apply_discount { text-align: right!important;}
+#knc_gc_apply_discount #knc_gc_apply_disc_val { width:60px; margin:0 10px; font-size: 12px; height:20px; font-family:Verdana, Arial, Helvetica, sans-serif; }
+.knc_apply_disc_btn { text-align:right; margin:10px 0px 0px 0px; padding-top:10px; border-top:1px solid #f2f2f2;}
+#knc_gc_cd_form input{ margin:0px 10px; font-size: 12px; height:20px; font-family:Verdana, Arial, Helvetica, sans-serif;} 
+

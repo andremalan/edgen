@@ -1,0 +1,187 @@
+/*
+	Skin Name: Skin 1 (default)
+*/
+
+
+body 							{ color: #414b52; }				/* Primary Text color */
+body, #Top #PageTop .inner-1 	{ background-color: #F2F0F0; }	/* Body Background color */
+#Wrapper						{ border-top-color: #D95B44; }	/* Top edge border color */
+#Top							{ background: #CECCCC; }		/* Header background color */
+#Middle .theContent .inner-1	{ background-color: #faf9f9; }	/* Content "page" area background color*/
+#Bottom .theContent				{ background-color: #414b52; 	/* Footer background color */
+								  color: #a0a5a9; }				/* Footer text color */
+
+/*  Links colors */
+a, a:link, a:visited, #BP-Content .activity-header-info .activity-action a.view, #BP-Content .activity-header-info .activity-action a.delete-activity			{ color: #d95b44; } /* links - default color */
+a:hover, a:active, #BP-Content .activity-header-info .activity-action a:hover.view, #BP-Content .activity-header-info .activity-action a:hover.delete-activity	{ color: #676666; } /* links - hover color */
+
+	a.boxLink, a.boxLink:link, a.boxLink:visited, #BP-Content .generic-button a:link, #BP-Content .generic-button a:visited		{ color: #fff; background-color: #d95b44; } /* box link (has bg color) */
+	a.boxLink:hover, a.boxLink:active, #BP-Content .generic-button a:hover, #BP-Content .generic-button a:active				{ background-color: #676666; } 				/* box link - hover */
+	
+	#Bottom footer a, #Bottom footer a:active, #Bottom footer a:visited { color: #dae0e5; }	/* footer links */
+	#Bottom footer a:hover 												{ color: #fff; }	/* footer links - hover */
+
+/* TopPanel - slide open top */
+#TopPanel .topPanelSection, #TopPanel ul.section-tabs li a.sectionTab							{ background-color: #A5A3A3; }	/* default tab color */
+#TopPanel .topPanelSection.primary-tab, #TopPanel ul.section-tabs li a.sectionTab.primary-tab	{ background-color: #D95B44; }	/* match #Wrapper border color (line 8). */
+	#TopPanel .topPanelSection				{ color: #fff;}						/* text color */
+		.rgba #TopPanel .topPanelSection	{ color: rgba(255,255,255,.6); }	/* text color (modern browsers) */
+	#TopPanel .topPanelSection a:link, #TopPanel .topPanelSection a:visited	{ color: #fff; text-decoration: underline; } 		/* link */
+	#TopPanel .topPanelSection a:hover, #TopPanel .topPanelSection a:active	{ color: #fff; } 									/* hover */
+		.rgba #TopPanel .topPanelSection a:link, .rgba #TopPanel .topPanelSection a:visited	{ color: rgba(255,255,255,.9);  }	/* link (modern browsers) */
+		.rgba #TopPanel .topPanelSection a:hover, .rgba #TopPanel .topPanelSection a:active	{ color: rgba(255,255,255,1); }	/* hover (modern browsers) */
+
+/* Main Menu (also effects admin bar) */
+#MainMenu .slideMenu ul li a:link, #MainMenu .slideMenu ul li a:visited,
+body #wp-admin-bar ul li ul li a:link, body #wp-admin-bar ul li ul li a:visited,
+body #wp-admin-bar ul li ul li:hover ul li a:link, body #wp-admin-bar ul li ul li:hover ul li a:visited	{ color: #414b52; } /*................ link color */
+#MainMenu .slideMenu ul li a:hover, body #wp-admin-bar ul li ul li a:hover,
+body #wp-admin-bar ul li ul li:hover ul li a:hover														{ color: #d95b44; } /*................ hover color */
+.slideMenu > ul > li > a:hover, .slideMenu > ul > li > a.hover,
+#MainMenu .slideMenu ul li ul.sub-menu, body #wp-admin-bar ul li ul,
+body #wp-admin-bar ul.main-nav li:hover, body #wp-admin-bar ul.main-nav li.sfhover						{ background-color: #fff; } /*........ hover background */
+#MainMenu .slideMenu ul li ul.sub-menu li a 															{ border-top-color: #F2F0F0; }	/* sub-menu - divider borders
+	 /* top level links only */
+	#MainMenu .slideMenu > ul > li > a:link, #MainMenu .slideMenu > ul > li > a:visited					{ color: #72787d; } /*................ top level links - color */
+
+/* Slide Show (paging links) */
+.slideShowPager a				{ border-bottom-color: #cecccc; }	/* color - default state */
+.slideShowPager a.activeSlide	{ border-bottom-color: #9c9a9a; }	/* color - active */
+.slideShowPager a:hover			{ border-bottom-color: #d95b44; }	/* color - hover */
+
+/* Headings and Titles */
+h1, h2, h3, h4, h5, h6, .cta-title, .posts-list .entry-title a, #Comments .poster-name a, #BP-Content .item-list .item-title a, #BP-Content .forum .item-title a, #BP-Content .item-list .item-content-container .poster-name a, #BP-Content .item-list .item-container .poster-name a, #BP-Content #item-header-content .entry-title a, .bp-content-tabs ul, .bp-content-tabs li a, .bp-content-tabs li a.active, .bp-content-tabs li.selected a, .bp-content-tabs li a.active, .bp-content-tabs li.current a, #BP-Content ul.activity-list .activity-comments .acomment-meta > a:first-child, .widget ul.item-list li .item-title a
+	{ color: #414b52; } /* text color */
+	
+	/* emphasis/highlight color */
+	h1 em, h2 em, h3 em, h4 em, h5 em, h6 em { color: #39748f; } 
+	/*Top "slide down" Headings */
+	#TopPanel .topPanelSection h1, #TopPanel .topPanelSection h2, #TopPanel .topPanelSection h3, #TopPanel .topPanelSection h4, #TopPanel .topPanelSection h5, #TopPanel .topPanelSection h6 { color: #fff; }
+	/* footer headings */
+	#Bottom footer h1, #Bottom footer h2, #Bottom footer h3, #Bottom footer h4, #Bottom footer h5, #Bottom footer h6 { color: #fff;}
+
+/* Dividers and Lines */
+hr, #Comments li ul.children, #BP-Content .register-section, #BP-Content .create-form { border-color: #e7e6e6; }
+
+/* Boxes and Containers */
+.pull-quote { border-color: #cecccc; }
+
+/* Forms and inputs */
+textarea, input[type="text"], input[type="password"], input[type="file"], .textInput,
+#BP-Container div#BP-Content form textarea, .field_type_captcha img { 
+	color: #000; 
+	background-color: #f0efef;
+	border-color: #c9c9c9 #d9d9d9 #e8e8e8; }
+	/* Header inputs (because it has a different bg color) */ 	
+	.PageTop textarea, .PageTop input[type="text"], .PageTop input[type="password"], .PageTop input[type="file"] {
+		background-color: #e9e7e7; border-color: #c4c2c2 #d3d1d1 #e2e0e0; }
+	/* For modern browsers */ 	
+	.rgba textarea, .rgba input[type="text"], .rgba input[type="password"], .rgba input[type="file"],
+	.rgba #BP-Container div#BP-Content form textarea, .rgba .field_type_captcha img {
+		background-color: rgba(0, 0, 0, .039); border-color: rgba(0, 0, 0, .19) rgba(0, 0, 0, .13) rgba(0, 0, 0, .07); }
+	/* hover, focus, error states */
+	textarea:hover, input[type="text"]:hover, input[type="password"]:hover, input[type="file"]:hover, 
+	.textInput:hover, .textInput.inputHover, #BP-Container div#BP-Content form textarea:hover 			{ border-color: #c9c9c9; } /*........................ hover */ 
+	textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="file"]:focus, 
+	.textInput:focus, .textInput.inputFocus, #BP-Container div#BP-Content form textarea:focus 			{ background-color: #fff; border-color: #ecada2; } /* focus */
+	textarea.error, input.error[type="text"], input.error[type="password"], input.error[type="file"], 
+	.textInput.error, .textInput.error, #BP-Container div#BP-Content form textarea.error 				{ border-color: #c00; } /*........................... error */
+	textarea.error:focus, input.error[type="text"]:focus, input.error[type="password"]:focus, input.error[type="file"]:focus, 
+	.textInput.error:focus, .textInput.error.inputFocus, #BP-Container div#BP-Content form textarea.error:focus { border-color: #c00; } /*................... error - active */
+	.publicContactForm em.error, #BP-Content .error { color: #c00; }
+
+/* Buttons (also includes BP sub-nav - flter, etc. appearing below tabs)*/
+.btn, a.btn:link, a.btn:visited, #BP-Content div.item-list-tabs#subnav, #BP-Content div.messages-options-nav, #BP-Content div.item-list-tabs#subnav ul li a, #BP-Content div.messages-options-nav a, body #wp-admin-bar .padder, body #wp-admin-bar ul li a, body #admin-bar-logo {
+	color: #444343; /* text (color) */
+	border-color: #c5c3c3 #bab8b8 #aeaaaa;	/* border color */
+ 	background: #d2cfcf;					/* background color (gradient) */
+	background: -webkit-gradient(linear, left top, left bottom, from(#dfdddd), to(#c6c2c2));
+	background: -moz-linear-gradient(top, #dfdddd,  #c6c2c2);
+	background: linear-gradient(#dfdddd, #c6c2c2); }
+	
+	/* Button hover styles */
+	.btn:hover, a.btn:hover, #BP-Content div.item-list-tabs#subnav ul li a:hover, #BP-Content div.messages-options-nav a:hover {
+		color: #444343; /* text (color) */
+		border-color: #bbb9b9 #b1afaf #a5a1a1;	/* border color */
+		background: #e1dede;					/* background color (gradient) */
+		background: -webkit-gradient(linear, left top, left bottom, from(#ecebeb), to(#cfcccc));
+		background: -moz-linear-gradient(top, #ecebeb,  #cfcccc);
+		background: linear-gradient(#ecebeb, #cfcccc); }
+
+	/* BuddyPress sub-nav and WP Admin Bar */
+	#BP-Content div.item-list-tabs#subnav, #BP-Content div.messages-options-nav, body #wp-admin-bar .padder { /* Set in ".btn" styles (above)*/ }
+	#BP-Content div.item-list-tabs#subnav ul li a, #BP-Content div.messages-options-nav a, body #wp-admin-bar ul li a, body #admin-bar-logo { 
+		/* Set in ".btn" styles (above)*/
+		background: transparent; /* <-- override link bg because it's applied to container instead */ }
+	#BP-Content div.item-list-tabs#subnav ul li a:hover, #BP-Content div.messages-options-nav a:hover { /* Set in ".btn" styles (above) */ }
+
+/* Tabs */
+.tabs										{ border-color: #e7e6e6; }		/* inactive tab & top edge of content area */
+.tabs a, .bp-content-tabs li a				{ background-color: #e7e6e6; }	/* inactive tab bg */
+.tabs a:hover, .bp-content-tabs li a:hover	{ background-color: #fdfcfc; }	/* inactive tab - hover */
+.tabs a.active, .tabs a.active:hover		{ background-color: #fff; border-color: #fff; border-bottom-color: #fff; }	/* active tab */
+.tab 										{ background: #fff; border-color: #fff; } /* content area */
+
+	/* BuddyPress specific tabs */
+	.bp-content-tabs ul, .bp-content-tabs li a, 
+	.bp-content-tabs li a.active, .bp-content-tabs li.selected a,
+	.bp-content-tabs li a.active, .bp-content-tabs li.current a		{ border-color: #cecccc; }		/* inactive tab & top edge of content area */
+	.bp-content-tabs li a.active, .bp-content-tabs li.selected a, .bp-content-tabs li a.active, .bp-content-tabs li.current a { 
+		background-color: #faf9f9; border-bottom-color: #faf9f9; }	/* active tab */
+
+/* toggle content */
+.toggleItem				{ border-color: #fff; }
+.toggleItem .togTitle	{ background-color: #fff; }
+.toggleItem .togDesc	{ background-color: #fff; border-top-color: #e8e8e8; }
+
+/* pricing tables */
+.price-column { background-color: #f7f5f5; border-bottom-color: #cecccc; }
+	.price-table .even-column						{ background-color: #fefcfc; }
+	.price-table .highlight-column 					{ background-color: #fff; }
+	.price-column .column-title 					{ background-color: #cecccc; }
+	.price-table .highlight-column .column-title	{ color: #fff; background-color: #39748f; }
+	.price-table .highlight-column .price-info		{ color: #39748f; }
+
+/* Item container (default containers for posts lists, portfolio items, quotes, etc...) */
+.item-container, .messageBox, .pagination, .nextPageLinks p, .widget ul.item-list li, .styled-image, .styled-slideshow, 
+.gallery .gallery-icon a, .widget_bp_core_recently_active_widget .avatar-block, .widget_bp_core_whos_online_widget .avatar-block { background-color: #fff; }
+
+/* Post list titles (hover color) */
+.posts-list .entry-title a:hover, #Comments .poster-name a:hover, #BP-Content .item-list .item-title a:hover, #BP-Content .forum .item-title a:hover, #BP-Content .item-list .item-container .poster-name a:hover, #BP-Content .item-list .item-content-container .poster-name a:hover, #BP-Content #item-header-content .entry-title a:hover, #BP-Content ul.activity-list .activity-comments .acomment-meta > a:first-child:hover	{ 
+	color: #d95b44; }
+	/* alternate hover color (if containers color changes) */
+	.widget ul.item-list li.hover .item-title a		{ color: #fff; }
+
+/* post info (the meta data, such as categories, comments, tags, date, etc, found in blog post lists) */
+.post-header-info, .post-header-info .author, .post-header-info .published,  .post-header-info .meta-sep, .post-footer-info .tag-links, #Comments .date, .messageBox.quote cite.quote_author, .post-header-info .cat-links a, .post-header-info .author a, .post-footer-info .tag-links a, #BP-Content .my-activity, #BP-Content .item-header .activity, #BP-Content .activity-header-info, #BP-Content .thread-group a, #BP-Content .thread-history, #BP-Content .item-list .date, #BP-Content .activity-header-info .activity-action a, .widget ul.item-list .item-meta { 
+	color: #a0a5a9; }
+	.post-header-info .cat-links a:hover, .post-header-info .author a:hover, .post-footer-info .tag-links a:hover, #BP-Content .thread-group a:hover, #BP-Content .activity-header-info .activity-action a:hover { 
+		color: #6f7375; } /* meta data - hover color */
+
+	/* hover container - meta data text color (some containers change bg color on hover, this adjusts the font color of the meta data when the bg color changes) */
+	.widget ul.item-list li.hover .item-meta { color: #ecada2; }
+
+/* WP widget styles (BP Widget styles at end of file) */
+#Middle .widgetTitle, .sectionTitle	{ border-bottom-color: #cecccc; }	/* title underline color */
+
+/* Pageination */
+.pagination a 								{ color: #bbb; }	/* link color */
+.pagination a:hover, .pagination a:active	{ color: #000; }	/* hover color */
+.pagination a.current						{ color: #616060; background: #f2f0f0;}	/* active page color */
+
+/* BuddyPress Activity */
+#BP-Content .activity-list .activity-action .view, #BP-Content .activity-list .activity-action .delete-activity, #BP-Content .activity-list .fav, #BP-Content .activity-list .unfav, #BP-Content .activity-list .acomment-reply  {
+	border-color: #dce3e8; } /* separator lines between links  */
+#BP-Content ul.activity-list li div.activity-inreplyto		{ background-color: #f2f0f0; }	/* bottom of BP activity replies */
+#BP-Content ul.activity-list li div.activity-comments ul li	{ border-color: #f2f0f0; }		/* BP activity nested comments - separator border between replies */
+
+/* BuddyPress Messages */
+#BP-Content #message-threads tr.unread td { background-color: #fff; }
+
+/* BuddyPress Forums */
+#BP-Content ul.forum-list li { border-bottom-color: #f2f0f0; }
+
+/* BuddyPress Widgets (BP) */
+.widget .item-options				{ color: #cecccc; }									/* link - color (for BP widgets with AJAX links at top) */
+.widget .item-options a.selected	{ color: #414b52; border-bottom-color: #d95b44; }	/* link - selected AJAX option */
+.widget ul.item-list li.hover		{ background-color: #d95b44; }						/* item hover - color of background container when hovering */
