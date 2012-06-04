@@ -1,0 +1,28 @@
+PLEASE READ THIS LICENSE AGREEMENT BEFORE ACCEPTING IT AND DOWNLOADING OR INSTALLING THE PLUG-IN. BY DOWNLOADING OR INSTALLING THIS PLUG-IN YOU ARE CONSENTING TO BE BOUND BY ALL THE TERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THESE TERMS AND CONDITIONS, DO NOT DOWNLOAD OR INSTALL THIS PLUG-IN.
+
+1. DEFINITIONS
+1.1. "Product" is "KNC Gift Coupon" and all the accompanying libraries/files.
+1.2. "Licensee" is the end-User who purchased this product. 
+
+2. GRANT OF LICENSE 
+Licensee may download, install and use the plug-in under the terms and conditions of this Agreement. Licensee may keep as many copies of this plug-in as he/she needs. 
+
+3. OWNERSHIP
+Licensee acknowledges and agrees that all rights, copyrights are and will remain the property of Amit Khanna. Nothing contained herein will be deemed to grant the User any right, copyright, trademark or other proprietary or intellectual property rights related thereto, other than the license expressly granted in this Agreement.
+
+4. RESTRICTIONS 
+4.1. The Licensee may not sell, resell, charge or accept payment for this plug-in. Licensee may use the plug-in for commercial (profit) and/or non-commercial (non-profit) applications. 
+4.2. Licensee may not distribute or redistribute the plug-in as is or by altering the plug-in or any part of it without prior written permission from Amit Khanna. Altering includes but is not limited to substitution, removal or addition of any file or part of files included in the package. 
+
+5. SUPPORT
+Amit Khanna may decide to provide limited internet support via e-mails or any other form it thinks appropriate. Response times are neither fixed nor guaranteed and may vary. Amit Khanna is not responsible if support was not supplied to the User. 
+
+6. DISCLAIMER
+THIS PLUG-IN IS PROVIDED "AS IS". AMIT KHANNA DOES NOT MAKE, AND EXPRESSLY DISCLAIMS, ANY EXPRESS OR IMPLIED WARRANTIES, REPRESENTATIONS OR ENDORSEMENTS OF ANY KIND WHATSOEVER, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, AND THE WARRANTIES OF TITLE OR NON-INFRINGEMENT. IN NO EVENT SHALL AMIT KHANNA BE LIABLE FOR ANY INCIDENTAL, CONSEQUENTIAL, OR INDIRECT DAMAGES (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF PROFITS, BUSINESS INTERRUPTION, LOSS OF PROGRAMS OR INFORMATION, AND THE LIKE) ARISING OUT OF THE USE OF OR INABILITY TO USE THE PLUG-IN, EVEN IF AMIT KHANNA OR ANY OF ITS AUTHORIZED REPRESENTATIVES HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, NOR WILL AMIT KHANNA BE LIABLE FOR ANY CLAIM ATTRIBUTABLE TO ERRORS, OMISSIONS, OR OTHER INACCURACIES IN THE PLUG-IN, OR ANY CLAIM BY ANY THIRD PARTY.
+
+7. MISCELLANEOUS
+7.1. Entire Agreement. This Agreement constitutes the entire agreement between the parties and supersedes any prior agreements.
+7.2. Modification. This Agreement may not be modified, amended, rescinded, canceled or waived, in whole or part, except by mutual consent with a written instrument signed by both parties.
+7.3. Waiver. Failure by either party to enforce any rights under this Agreement will not be construed as a waiver of such rights, and a waiver by either party of a default hereunder in one or more instances will not be construed as constituting a continuing waiver or as a waiver in other instances. 
+
+LICENSEE ACKNOWLEDGES THAT LICENSEE HAS READ THIS AGREEMENT, UNDERSTANDS IT AND AGREES TO BE BOUND BY ITS TERMS AND CONDITIONS. LICENSEE FURTHER AGREES THAT IT IS THE COMPLETE AND EXCLUSIVE STATEMENT OF THE AGREEMENT BETWEEN LICENSEE AND AMIT KHANNA WHICH SUPERSEDES ANY PROPOSAL OR PRIOR OR CONTEMPORANEOUS AGREEMENT, ORAL OR WRITTEN, AND ANY OTHER COMMUNICATIONS RELATING TO THE SUBJECT MATTER OF THIS AGREEMENT
