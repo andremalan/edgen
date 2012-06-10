@@ -14,11 +14,17 @@ function wpsc_instantiate_purchaselogitem() {
 }
 
 function wpsc_display_tracking_id(){
-   $value = wpsc_trackingid_value();
-   if(!empty($value))
-      return $value;
-   else
-      return __('Add New','wpsc');
+//ideahack hacking the track column to show the user id and email intead
+ global $purchlogs;
+   $user_id =  esc_attr( $purchlogs->purchitem->user_ID );
+$user = get_userdata($user_id);
+return $user_id . ", " . $user->user_email;
+//   $value = wpsc_trackingid_value();
+//   if(!empty($value))
+//      return $value;
+//   else
+//      return __('Add New','wpsc');
+//end ideahack
 }
 
 function wpsc_display_purchlog_howtheyfoundus() {

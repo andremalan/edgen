@@ -101,10 +101,10 @@ th#amount{
 	width:75px;
 }
 th#name{
-/* 	width:220px; */
+ 	width:20px; 
 }
 th#track{
-	width:75px;
+	width:235px;
 }
 th#delete{
 	width:60px;
