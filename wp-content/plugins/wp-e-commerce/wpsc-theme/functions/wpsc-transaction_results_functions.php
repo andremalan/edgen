@@ -139,8 +139,11 @@ function transaction_results( $sessionid, $display_to_screen = true, $transactio
 			$billing_country = $country;
 			$shipping_country = $country;
 		}
-
-		$email = wpsc_get_buyers_email($purchase_log['id']);
+//ideahack -> making sure thank you email gets sent to users
+		global $current_user;
+		get_currentuserinfo();
+		$email = $current_user->user_email;
+//end ideahack
 		$previous_download_ids = array( );
 		$product_list = $product_list_html = $report_product_list = '';
 	
