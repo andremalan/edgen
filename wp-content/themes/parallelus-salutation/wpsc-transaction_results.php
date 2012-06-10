@@ -18,8 +18,10 @@
 		
 		// Code to check whether transaction is processed, true if accepted false if pending or incomplete
 		
-		
-		echo "<br />" . wpautop(str_replace("$",'\$',$message_html));						
+		//ideahack, making it not display the email. 		
+		//echo "<br />" . wpautop(str_replace("$",'\$',$message_html));						
+		echo "Thanks for your donation! You should receive a confirmation email shortly. In the mean time, why not use the tweet button above to let others know?";
+		//ideahack end
 	}elseif ( true === $echo_to_screen && ( !isset($purchase_log) ) ) {
 			_e('Oops, there is nothing in your cart.', 'wpsc') . "<a href=".get_option("product_list_url").">" . __('Please visit our shop', 'wpsc') . "</a>";
 	}
