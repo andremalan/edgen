@@ -341,20 +341,20 @@ endif;
 		<div class="wpsc_registration_form">
 			
 	        <fieldset class='wpsc_registration_form wpsc_right_registration'>
-	        	<h2><?php _e('Join up now', 'wpsc');?></h2>
-	    
-				<label><?php _e('Username', 'wpsc'); ?>:</label>
-				<input type="text" name="log" id="log" value="" size="20"/><br/>
-				
-				<label><?php _e('Password', 'wpsc'); ?>:</label>
-				<input type="password" name="pwd" id="pwd" value="" size="20" /><br />
-				
-				<label><?php _e('E-mail', 'wpsc'); ?>:</label>
-	            <input type="text" name="user_email" id="user_email" value="<?php echo attribute_escape(stripslashes($user_email)); ?>" size="20" /><br />
+	        	        	<h2><?php _e('Join up now', 'wpsc');?></h2>
+	        	    
+	        		<!-- 		<label><?php _e('Username', 'wpsc'); ?>:</label>
+	        				<input type="text" name="log" id="log" value="" size="20"/><br/>
+	        				
+	        				<label><?php _e('Password', 'wpsc'); ?>:</label>
+	        				<input type="password" name="pwd" id="pwd" value="" size="20" /><br />
+	        				
+	        				<label><?php _e('E-mail', 'wpsc'); ?>:</label>
+	        	            <input type="text" name="user_email" id="user_email" value="<?php echo attribute_escape(stripslashes($user_email)); ?>" size="20" /><br /> -->
 		 
 		<!-- <p>Thanks!</p> -->
 		
-		<!-- <input class="btn" name="register" value="Click to Register" /> -->
+		<a href="http://educationgeneration.org/register" class="btn" name="register">Click to Register</a>
 		
 	            <div class="wpsc_signup_text"><?php _e('Signing up is free and easy! please fill out your details your registration will happen automatically as you checkout. Don\'t forget to use your details to login with next time!', 'wpsc');?></div>
 	        </fieldset>

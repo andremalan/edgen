@@ -417,3 +417,17 @@ add_action('dpw_email_meta_box', 'ih_add_email_meta_boxes');
 add_filter('dpw_email_get_types', 'ih_add_email_types');
 add_filter('wpsc_transaction_result_message_html', 'ih_add_email_fields');
 add_filter('wpsc_transaction_result_message', 'ih_add_email_fields');
+
+// function ih_redirect_if_students_in_cart(){
+// 	if ( wpsc_cart_item_count() > 0 && 'completed-confirmation' == bp_get_current_signup_step() ) {
+// 		
+// 
+// 		
+// 		// wp_redirect('/students/checkout/', 301 );
+// 	}
+// }
+// 
+// // add_action('bp_before_registration_confirmed', 'ih_redirect_if_students_in_cart');
+// 
+// // add_action('get_header', 'ih_redirect_if_students_in_cart');
+
