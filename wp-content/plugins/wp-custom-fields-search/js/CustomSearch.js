@@ -139,7 +139,7 @@ CustomSearch.get = function(id){
 	return CustomSearch[id];
 };
 
-var testing=false;
+var testing=true;
 if(testing)
 jQuery(document).ready(function(){
 	jQuery('.widget-control-edit').click();

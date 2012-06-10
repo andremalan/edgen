@@ -3,7 +3,7 @@
 // Core constants
 function knc_gc_core_const()
 {
-	global $table_prefix, $wpdb;
+	global $table_prefix, $wpdb, $current_user;
 	
 	$knc_gc_plugin_url = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)); 
 	define('KNC_GC_URL', $knc_gc_plugin_url);
@@ -17,6 +17,7 @@ function knc_gc_core_const()
 		$wp_table_prefix = $table_prefix;
 
 	define('KNC_GC_TABLE_COUPON_CODES' 		,  "{$wp_table_prefix}knc_gc_details");
+	define('KNC_GC_TABLE_ADMIN_EMAIL' 		,  "{$wp_table_prefix}users");
 	define('KNC_GC_TABLE_ADMIN_OPTIONS'		,  "{$wp_table_prefix}knc_gc_options");
 	define('KNC_GC_TABLE_ADMIN_DB_VERSION'  ,  "knc_gc_options_db_version");
 	define('KNC_GC_TABLE_COUPON_DB_VERSION' ,  "knc_gc_coupon_db_version");

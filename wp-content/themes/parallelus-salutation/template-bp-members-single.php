@@ -8,7 +8,7 @@
 				<div class="item-header">
 					<?php locate_template( array( 'members/single/member-header.php' ), true ) ?>
 				</div>
-		<!-- You may note your profile is a little empty at this point. Please rest assured that we will be adding in all of the information regarding your past donations and links to students you have supported. In the meantime, you can use the profile tab below to update your information, and other tabs to change passwords or other information. This section may experience updates and changes in the coming weeks - we'd love to hear any concerns or feedback.  -->
+		You may note your profile is a little empty at this point. Please rest assured that we will be adding in all of the information regarding your past donations and links to students you have supported. In the meantime, you can use the profile tab below to update your information, and other tabs to change passwords or other information. This section may experience updates and changes in the coming weeks - we'd love to hear any concerns or feedback. 
 			</header>
 	
 			<div id="item-nav">

@@ -10,8 +10,8 @@
 
 	global $purchase_log, $errorcode, $sessionid, $echo_to_screen, $cart, $message_html;
 ?>
-<div class="wrap">
 
+<div class="wrap">
 <?php
 	echo wpsc_transaction_theme();
 	if ( ( true === $echo_to_screen ) && ( $cart != null ) && ( $errorcode == 0 ) && ( $sessionid != null ) ) {			

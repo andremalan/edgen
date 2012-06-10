@@ -1074,7 +1074,7 @@ function wpsc_gallery_css_mods() {
 				margin-left:0px;
 			}
 			td.savesend input.button {
-				display:block;
+			  display:block;
 			}
 	</style>';
 	print '

@@ -96,7 +96,7 @@ if ( ! function_exists( 'create_page_layout' ) ) :
 			$theLayout['blog']['image']['width'] = (int)get_theme_var('blog,post_image_width', 153); // image width
 			$theLayout['blog']['image']['height'] = (int)get_theme_var('blog,post_image_height', 153); // image height
 			$theLayout['blog']['use_excerpt'] = get_theme_var('blog,use_post_excerpt');
-			$theLayout['blog']['excerpt_length'] = (int)get_theme_var('blog,excerpt_length', 40); // length of excerpt
+			$theLayout['blog']['excerpt_length'] = (int)get_theme_var('blog,excerpt_length', 50); // length of excerpt
 			$theLayout['blog']['read_more'] = get_theme_var('blog,read_more_text'); // optional "Read more..." link
 			$theLayout['blog']['blog_featured_images'] = (get_theme_var('blog,blog_show_image')) ? 1 : 0;
 			$theLayout['blog']['post_featured_images'] = (get_theme_var('blog,post_show_image')) ? 1 : 0;
@@ -829,21 +829,23 @@ if ( ! function_exists( 'display_slideShow' ) ) :
 					$country = get_post_meta(get_the_ID(), 'Country', true);
 					$area_of_study = get_post_meta(get_the_ID(), 'Program Title', true);
 					$funding_needed = get_post_meta(get_the_ID(), 'Funding Needed', true);							
-    				$raised = get_post_meta(get_the_ID(), 'Funding Received', true);
+    			$raised = get_post_meta(get_the_ID(), 'Funding Received', true);
 					$funding_deadline = get_post_meta(get_the_ID(), 'Expiration Date (yyyy/mm/dd)', true);
-    				$progress = (($raised + 1.0) /$funding_needed) *100;
-					//$excerpt = get_the_excerpt();	
-					$excerpt = substr(get_the_excerpt(), 0, 300);
-									
+    			$progress = (($raised + 1.0) /$funding_needed) *100;
+					$excerpt = get_the_excerpt();
+					
+					// ideahack - code to check for urgency and display urgent button
+					
 					$studentexpdate = get_post_meta(wpsc_the_product_id(), 'Expiration Date (yyyy/mm/dd)', true);						
 					$today_date = date('Y/m/d');
 					$days_to_expiration = (strtotime($studentexpdate) - strtotime($today_date)) / 86400;
 					$urgent = '';
 
 					if ($days_to_expiration <= 3 && $days_to_expiration > 0) {
+						$urgent = "<div class='urgent' style='float:right;background:#FF9933;padding:10px;color:#f5f5f5;text-transform:uppercase;'>Urgent - Deadline Approaching</div>";
 						$urgent = "<div class='urgent' style='background:#FF9933;padding:10px;color:#f5f5f5;text-transform:uppercase;width:230px;'>Urgent - Deadline Approaching</div>";
 					}
-									
+							
 					$image_width  = get_option( 'single_view_image_width' );
 					$image_height = get_option( 'single_view_image_height' );
 								
@@ -862,10 +864,10 @@ if ( ! function_exists( 'display_slideShow' ) ) :
 					<a href='$featured_link'>
 						<div id='featured_content'>
 							<div id='featured_image'>
-								$urgent
+								$urgent		
 								<img src= '$featured_media' width='250px' />
 							</div>
-							<div class='featured_content'>
+							<div class='featured_content'>					
 								<div id='student_name'><strong>Name: </strong>$name</div>
 								<div id='country'><strong>Country:</strong> $country</div>
 								<div id='areaofstudy'><strong>Area of Study: </strong> $area_of_study</div>

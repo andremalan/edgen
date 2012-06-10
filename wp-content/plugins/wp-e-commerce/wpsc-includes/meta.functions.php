@@ -262,7 +262,7 @@ class wpsc_custom_meta {
 	}
 
 	function rewind_custom_meta() {
-		if ($this->custom_meta_count > 0) {
+		if ($this->custom_meta_count >= 0) {
 			$this->custom_meta_values = $this->custom_meta[0];
 		}
 	}	

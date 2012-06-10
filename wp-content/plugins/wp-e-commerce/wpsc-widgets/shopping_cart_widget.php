@@ -141,7 +141,7 @@ class WP_Widget_Shopping_Cart extends WP_Widget {
 		<p>
 			
 			<label for="<?php echo $this->get_field_id('show_sliding_cart'); ?>"><?php _e( 'Use Sliding Cart:', 'wpsc' ); ?></label>
-			<input id="<?php echo $this->get_field_id( 'show_sliding_cart' ); ?>" name="<?php echo $this->get_field_name( 'show_sliding_cart' ); ?>" type="checkbox" value="1" <?php echo $show_sliding_cart; ?> />
+			<input id="<?php echo $this->get_field_id( 'show_sliding_cart' ); ?>" name="<?php echo $this->get_field_name( 'show_sliding_cart' ); ?>" type="checkbox" value="0" <?php echo $show_sliding_cart; ?> />
 		</p>
 		
 		<?php

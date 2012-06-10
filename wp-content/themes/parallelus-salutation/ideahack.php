@@ -5,7 +5,7 @@
 
 //edgen_email
 
-define("EDGEN_EMAIL", "shawncorp@gmail.com");
+define("EDGEN_EMAIL", "raden.andre_gmail.com");
 //list all subpages (for partner pages)
 add_shortcode('list_all_subpages', 'ih_list_all_subpages');
 
@@ -152,7 +152,7 @@ function ih_close_tags($text) {
 
     {
 
-        $m_open = $matches[1];
+        $m_open = $matches[0];
 
         if(!empty($m_open))
 
@@ -193,7 +193,7 @@ function ih_close_tags($text) {
 	$return_value = "";
 	$output = preg_replace('/<img[^>]+./','', $theContent);  
 
-	$limit = $num+1;  
+	$limit = $num + 1;  
 
 	$content = explode(' ', $output, $limit);  
 
@@ -261,18 +261,11 @@ return get_stylesheet_directory_uri() .'/img/edgenlogo.png';
 add_filter( 'bp_core_mysteryman_src', 'myavatar_add_default_avatar' );
 
 function ih_display_urgent() {
-	$studentexpdate = get_post_meta(wpsc_the_product_id(), 'Expiration Date (yyyy/mm/dd)', true);
-	
-	 $fundingneeded = get_post_meta(wpsc_the_product_id(), 'Funding Needed', true);
-	$fundingrec = get_post_meta(wpsc_the_product_id(), 'Funding Received', true);
-	$fullyfunded = false;
-	// 
-	if ($fundingrec == $fundingneeded) { $fullyfunded = true; }
-							
+	$studentexpdate = get_post_meta(wpsc_the_product_id(), 'Expiration Date (yyyy/mm/dd)', true);						
 	$today_date = date('Y/m/d');
 	$days_to_expiration = (strtotime($studentexpdate) - strtotime($today_date)) / 86400;
 
-	if ($days_to_expiration <= 3 && $days_to_expiration >= 0 && $fullyfunded = false) {
+	if ($days_to_expiration <= 3 && $days_to_expiration > 0) {
 		echo "<div class='urgent' style='float:right;background:#FF9933;padding:10px;color:#f5f5f5;text-transform:uppercase;'>Urgent - Deadline Approaching</div>";
 	}
 }
@@ -318,7 +311,7 @@ function ih_update_students($purchase_id){
      $user_info = get_userdata($purchase_log['user_ID']);
      $username = $user_info->user_login;
      $user_email = $user_info->user_email;
-     wp_mail("shawncorp@gmail.com", 'Student received new donation', "$row[name] has recieved $ $new_funding. She was donated to  $row[quantity] time. She needed $ $funding_needed. The contributor was user ID $purchase_log[user_ID] and username of $username and email of $user_email");
+     wp_mail('raden.andre@gmail.com', 'Student received new donation', "$row[name] has recieved $ $new_funding. She was donated to  $row[quantity] time. She needed $ $funding_needed. The contributor was user ID $purchase_log[user_ID] and username of $username and email of $user_email");
      //end ideahack
    }
  }
@@ -368,7 +361,7 @@ function ih_email_contributors($post_id, $email_status = "") {
   $recipients = array_unique($recipients);
   foreach ($recipients as $recipient_id){
     $replaced_content = ih_replace_email_content($content[1], $post_id, $recipient_id);
-    wp_mail(get_userdata($recipient_id)->user_email, $content[0] , $replaced_content, "content-type: text/html");
+    wp_mail("raden.andre@gmail.com", $content[0] , $replaced_content, "content-type: text/html");
   }
   update_post_meta($post_id,  'Send Email', 'none');
 }

@@ -38,17 +38,19 @@ knc_gc_error_const();
  */
 $knc_gc_dmy = array("day" => "Day(s)", "month" => "Month(s)", "year" => "Year(s)",);
 $_SESSION['knc_user_disc_status'] = 0;
-global	$knc_db_version; 
+global	$knc_db_version,$current_user; 
 		$knc_db_version = '1.0';
 
 /*
  *	MAIN PLUG-IN CLASS
  */
+
+
 if (!class_exists("knc_gift_coupon")) {
 	class knc_gift_coupon 
 	{	
 		// VARIABLE DECLARATIOINS
-		// var $knc_gc_admin_table_name = "knc_gift_coupon_options";
+		var $knc_gc_admin_table_name = "knc_gift_coupon_options";
 		
 		var $ourGateway = array('wpsc_merchant_paypal_standard_knc_mu');
 		
@@ -87,7 +89,7 @@ if (!class_exists("knc_gift_coupon")) {
 			$_REQUEST   = array_map( 'stripslashes_deep', $_REQUEST );
 			
 			$knc_gc_options = $this->get_admin_options();
-			
+
 			if (isset($_POST['update_knc_gc_settings'])) {
 
 				if (isset($_POST['knc_gc_name'])) {
@@ -113,7 +115,7 @@ if (!class_exists("knc_gift_coupon")) {
 						$knc_gc_options['test_mode'] = 'false';
 					}
 				}else{
-					$knc_gc_options['test_mode'] = 'false';
+					//$knc_gc_options['test_mode'] = 'false';
 				}
 				
 				if (isset($_POST['test_mail'])) {
@@ -194,7 +196,7 @@ if (!class_exists("knc_gift_coupon")) {
 						$mailFrom 	=  $knc_gc_options['mail_from'];
 						$mailSub 	=  $knc_gc_options['mail_subject'];
 						$testMode	=  $knc_gc_options['test_mode'];
-						$testMail	=  $knc_gc_options['test_mail'];
+						//$testMail	=  $knc_gc_options['test_mail'];
 						
 						
 						foreach($couponName as $key => $value){
@@ -477,7 +479,7 @@ function knc_show_apply_discount_form(){
 		?>
 		<form style="display:<?php echo $_SESSION['knc_disc_form_display']; ?>;" id="knc_gc_apply_discount" method="post" action="<?php echo $knc_current_page_url; ?>">
 			<div class="knc_apply_disc_btn">
-				<input type="hidden" name="knc_update_percent_disc_val" value="true" />
+				<input type="hidden" name="knc_update_percent_disc_val" value="false" />
 				<input type="submit" id="knc_gc_apply_disc_btn" value="<?php _e('Apply Gift Card', 'knc_gift_coupon');?>" />
 			</div>
 		</form>
@@ -804,7 +806,7 @@ function knc_gc_apply_discount(){
 		$knc_total_price = $wpsc_cart->calculate_subtotal();
 		$knc_discount_available = $knc_coupon_details->coupon_value;
 		$knc_discount_value = $knc_total_price * $knc_discount_available/100;
-		$wpsc_cart->apply_coupons( $knc_discount_value, $coupon_code );
+		//$wpsc_cart->apply_coupons( $knc_discount_value, $coupon_code );
 	}
 	
 	if ( isset( $_REQUEST['knc_update_disc_val'] ) && ($_REQUEST['knc_update_disc_val'] == 'true')) {

@@ -10,7 +10,6 @@
 ?>
 
 <div id="single_product_page_container">
-	
 	<?php
 		// Breadcrumbs
 		wpsc_output_breadcrumbs();
@@ -25,9 +24,6 @@
 		 * Start the product loop here.
 		 * This is single products view, so there should be only one
 		 */
-
-
-
 
 
 	if(isset($_GET['doitnow2']) && $_GET['doitnow2'] == 'yes' ){
@@ -146,7 +142,7 @@
 
 						<?php // ideahack end of add /remove from cart stuffs.?>						
 						
-						
+
 					</div><!--close imagecol-->
 
 					<div class="productcol">
@@ -158,9 +154,11 @@
 
                         <?php if (wpsc_have_custom_meta()) : ?>
                     						<div class="custom_meta">
+	
 												<?php
 												ih_display_urgent();
 												?>
+	
                     								<?php
 
 
@@ -179,7 +177,11 @@
                     										echo "<div id='areaofstudy'><strong>Area of Study:</strong> " . $area_of_study . "</div>";
                     									if ( $funding_deadline != "" )
                     										echo "<div id='deadline'><strong>Funding Deadline:</strong> " . $funding_deadline . "</div>";
+
+
+
                     								?>
+
 
                                     		<?php 	ih_display_funding_bar(wpsc_the_product_id());	?>
 

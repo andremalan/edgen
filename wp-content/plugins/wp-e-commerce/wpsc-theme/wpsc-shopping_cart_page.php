@@ -14,80 +14,21 @@ endif;
 <div id="checkout_page_container">
 <h3><?php _e('Please review your order', 'wpsc'); ?></h3>
 <table class="checkout_cart">
-   <!--tr class="header">
+   <tr class="header">
       <th colspan="2" ><?php _e('Product', 'wpsc'); ?></th>
       <th><?php _e('Quantity', 'wpsc'); ?></th>
       <th><?php _e('Price', 'wpsc'); ?></th>
       <th><?php _e('Total', 'wpsc'); ?></th>
         <th>&nbsp;</th>
-   </tr-->
-
-	<tr>
-	<?php $our_cart_total = wpsc_cart_total(false); //we need this for donation ?>
-	<?php //wpsc_donations(wpsc_cart_total(false) ) ; ?>
-	<?php //var_dump($_POST); ?>
-	</tr>
-
-	<?php $has_donation = false; //to check if any of the items are donations  ?>
-	
-	
-	  <?php while (wpsc_have_cart_items()) : wpsc_the_cart_item(); ?>
-		<?php
-		//check to see if the item is a donation, if it is, set the donation flag.
-			$is_donation = get_post_meta( wpsc_cart_item_product_id(), '_wpsc_is_donation', true );
-			if (1 == $is_donation)
-				$has_donation = true;
-		?>
-	<?php endwhile; ?>
-	
-	
-	
-	<?php // Add a donation if there are no donations
-		if(!$has_donation && !(isset($_POST['quantity']) && $_POST['quantity'] == 0)){
-			
-			
-			$meta = array(
-				'is_donation' => 1
-			);
-			
-			$quantity = (int) round($our_cart_total / 10.0);
-			//$provided_price = 6;
-			
-			$default_parameters['variation_values'] = null;
-			$default_parameters['quantity'] = $quantity;
-			$default_parameters['provided_price'] = 1;
-			$default_parameters['comment'] = null;
-			$default_parameters['time_requested'] = null;
-			$default_parameters['custom_message'] = null;
-			$default_parameters['file_data'] = null;
-			$default_parameters['is_customisable'] = false;
-			$default_parameters['meta'] = $meta;
-			
-			$result = $wpsc_cart->set_item(3457, $default_parameters);
-			//echo $result;
-			//wp_redirect("/");
-			//wpsc_add_to_cart();
-		}
-	
-	?>
-	
-	
-	
-	<?php $our_cart_total = wpsc_cart_total(false); //we need to recalculate after adding ?>
-	
-	
-	
+   </tr>
    <?php while (wpsc_have_cart_items()) : wpsc_the_cart_item(); ?>
-      
-
-	<?php
+      <?php
        $alt++;
        if ($alt %2 == 1)
          $alt_class = 'alt';
        else
          $alt_class = '';
        ?>
-
       <?php  //this displays the confirm your order html ?>
 
 	  <?php do_action ( "wpsc_before_checkout_cart_row" ); ?>
@@ -117,10 +58,8 @@ endif;
          </td>
 
          <td class="wpsc_product_quantity wpsc_product_quantity_<?php echo wpsc_the_cart_item_key(); ?>">
-            <form action="/students/checkout" method="post" class="adjustform qty">
-               <!--input type="text" name="quantity" size="2" value="<?php echo wpsc_cart_item_quantity(); ?>" /-->
-<?php ih_quantity_display( wpsc_cart_item_product_id(), wpsc_cart_item_quantity(), "cart" , wpsc_cart_item_name(), $our_cart_total); ?>
-
+            <form action="<?php echo get_option('shopping_cart_url'); ?>" method="post" class="adjustform qty">
+               <input type="text" name="quantity" size="2" value="<?php echo wpsc_cart_item_quantity(); ?>" />
                <input type="hidden" name="key" value="<?php echo wpsc_the_cart_item_key(); ?>" />
                <input type="hidden" name="wpsc_update_quantity" value="true" />
                <input type="submit" value="<?php _e('Update', 'wpsc'); ?>" name="submit" />
@@ -128,11 +67,11 @@ endif;
          </td>
 
        
-            <!--td><?php //echo wpsc_cart_single_item_price(); ?></td>
-         <td class="wpsc_product_price wpsc_product_price_<?php //echo wpsc_the_cart_item_key(); ?>"><span class="pricedisplay"><?php //echo wpsc_cart_item_price(); ?></span></td-->
+            <td><?php echo wpsc_cart_single_item_price(); ?></td>
+         <td class="wpsc_product_price wpsc_product_price_<?php echo wpsc_the_cart_item_key(); ?>"><span class="pricedisplay"><?php echo wpsc_cart_item_price(); ?></span></td>
 
          <td class="wpsc_product_remove wpsc_product_remove_<?php echo wpsc_the_cart_item_key(); ?>">
-            <form action="/students/checkout" method="post" class="adjustform remove">
+            <form action="<?php echo get_option('shopping_cart_url'); ?>" method="post" class="adjustform remove">
                <input type="hidden" name="quantity" value="0" />
                <input type="hidden" name="key" value="<?php echo wpsc_the_cart_item_key(); ?>" />
                <input type="hidden" name="wpsc_update_quantity" value="true" />
@@ -140,63 +79,34 @@ endif;
             </form>
          </td>
       </tr>
-
-
 	  <?php do_action ( "wpsc_after_checkout_cart_row" ); ?>
    <?php endwhile; ?>
-	
-
-
-
    <?php //this HTML displays coupons if there are any active coupons to use ?>
-
-
 
    <?php
 
    if(wpsc_uses_coupons()): ?>
 
       <?php if(wpsc_coupons_error()): ?>
-         <!--tr class="wpsc_coupon_row wpsc_coupon_error_row"><td><?php _e('Coupon is not valid.', 'wpsc'); ?></td></tr-->
+         <tr class="wpsc_coupon_row wpsc_coupon_error_row"><td><?php _e('Coupon is not valid.', 'wpsc'); ?></td></tr>
       <?php endif; ?>
-      <!--tr class="wpsc_coupon_row">
-         <td colspan="2"><?php _e('Enter gift card code', 'wpsc'); ?> :</td>
+      <tr class="wpsc_coupon_row">
+         <td colspan="2"><?php _e('Enter coupon code', 'wpsc'); ?> :</td>
          <td  colspan="4" class="coupon_code">
             <form  method="post" action="<?php echo get_option('shopping_cart_url'); ?>">
                <input type="text" name="coupon_num" id="coupon_num" value="<?php echo $wpsc_cart->coupons_name; ?>" />
                <input type="submit" value="<?php _e('Update', 'wpsc') ?>" />
+               
             </form>
          </td>
-      </tr-->
-	       
-
-
-
-	  <?php if(wpsc_uses_coupons() && (wpsc_coupon_amount(false) > 0)): ?>
-	      <tr class="total_price">
-	         <td class='wpsc_totals'>
-	            <?php _e('Gift card credit', 'wpsc'); ?>:
-	         </td>
-	         <td class='wpsc_totals'>
-	            <span id="coupons_amount" class="pricedisplay"><?php echo wpsc_coupon_amount(); ?></span>
-	          </td>
-	         </tr>
-	     <?php endif ?>
-
-
-
-	   <tr class='total_price'>
-	      <td class='wpsc_totals'>
-	      <?php _e('Total', 'wpsc'); ?>:
-	      </td>
-	      <td class='wpsc_totals'>
-	         <span id='checkout_total' class="pricedisplay checkout-total"><?php echo wpsc_cart_total(); ?></span>
-	      </td>
-	   </tr>   <?php endif; ?>
+      </tr>
+      <tr class="wpsc_total_before_shipping">
+	      <td colspan="3"><?php _e('Cost before shipping:','wpsc'); ?></td>
+	      <td colspan="3" class="wpsc_total_amount_before_shipping"><?php echo wpsc_cart_total_widget(false,false,false);?></td>
+      </tr>
+   <?php endif; ?>
    </table>
    <!-- cart contents table close -->
-<?php do_shortcode('[knc-coupon-form]'); ?>
-
   <?php if(wpsc_uses_shipping()): ?>
 	   <p class="wpsc_cost_before"></p>
    <?php endif; ?>
@@ -315,18 +225,23 @@ endif;
 	<?php endif; ?>
 
 	<?php if ( wpsc_show_user_login_form() && !is_user_logged_in() ): ?>
-			<p><?php _e('You must sign in or register with us to continue with your donation', 'wpsc');?></p>
+			<p><?php _e('You must sign in or register with us to continue with your purchase', 'wpsc');?></p>
 			<div class="wpsc_registration_form">
 				
 				<fieldset class='wpsc_registration_form'>
-					 <?php sidebarlogin(); ?> 
-					 <?php widgets_on_template("checkout_login");?>
-					 
-					<div class="wpsc_signup_text">If you've donated on Education Generation before, please sign in to finish donating.</div>
+					<h2><?php _e( 'Sign in', 'wpsc' ); ?></h2>
+					<?php
+					$args = array(
+						'remember' => false,
+                    	'redirect' => home_url( $_SERVER['REQUEST_URI'] )
+					);
+					wp_login_form( $args );
+					?>
+					<div class="wpsc_signup_text"><?php _e('If you have bought from us before please sign in here to purchase', 'wpsc');?></div>
 				</fieldset>
 			</div>
 	<?php endif; ?>	
-	<form class='wpsc_checkout_forms' action='/students/checkout' method='post' enctype="multipart/form-data">
+	<form class='wpsc_checkout_forms' action='<?php echo get_option('shopping_cart_url'); ?>' method='post' enctype="multipart/form-data">
 				
       <?php
       /**
@@ -342,7 +257,7 @@ endif;
 			
 	        <fieldset class='wpsc_registration_form wpsc_right_registration'>
 	        	<h2><?php _e('Join up now', 'wpsc');?></h2>
-	    
+	      
 				<label><?php _e('Username', 'wpsc'); ?>:</label>
 				<input type="text" name="log" id="log" value="" size="20"/><br/>
 				
@@ -351,17 +266,11 @@ endif;
 				
 				<label><?php _e('E-mail', 'wpsc'); ?>:</label>
 	            <input type="text" name="user_email" id="user_email" value="<?php echo attribute_escape(stripslashes($user_email)); ?>" size="20" /><br />
-		 
-		<p>Thanks!</p>
-		
-		<!-- <input class="btn" name="register" value="Click to Register" /> -->
-		
+	            
 	            <div class="wpsc_signup_text"><?php _e('Signing up is free and easy! please fill out your details your registration will happen automatically as you checkout. Don\'t forget to use your details to login with next time!', 'wpsc');?></div>
 	        </fieldset>
 	        
         </div>
-
-
         <div class="clear"></div>
    <?php endif; // closes user login form
 
@@ -588,8 +497,6 @@ endif;
    </table>
 
 <!-- div for make purchase button -->
-<!-- ideahack getting rid of donation button for logged in useres-->
-<?php if ( is_user_logged_in() ): ?>
       <div class='wpsc_make_purchase'>
          <span>
             <?php if(!wpsc_has_tnc()) : ?>
@@ -599,7 +506,7 @@ endif;
                <input type='submit' value='<?php _e('Purchase', 'wpsc');?>' name='submit' class='make_purchase wpsc_buy_button' />
          </span>
       </div>
-<?php endif; ?>
+
 <div class='clear'></div>
 </form>
 </div>
@@ -608,6 +515,3 @@ endif;
 do_action('wpsc_bottom_of_shopping_cart');
 
 ?>
-
-
-

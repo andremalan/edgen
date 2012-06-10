@@ -1078,6 +1078,7 @@ class wpsc_cart {
       // Set variable and return
       $this->total_price = $total;
 
+
       return $total;
 
   }
@@ -1600,7 +1601,7 @@ function refresh_item() {
 	$special_price = get_post_meta( $product_id, '_wpsc_special_price', true );
 	$product_meta = get_post_meta( $product_id, '_wpsc_product_metadata' );
 	$this->stock = get_post_meta( $product_id, '_wpsc_stock', true );
-	$this->is_donation = get_post_meta( $product_id, '_wpsc_is_donation', true );
+	$this->is_donation = get_post_meta( $product_id, '_wpsc_is_donation', true);
 
 
 	if ( isset( $special_price ) && $special_price > 0 && $special_price < $price )
@@ -1637,10 +1638,10 @@ function refresh_item() {
 
 	$quantity_limited = get_product_meta($product_id, 'stock', true);
 	$this->has_limited_stock = (bool)$quantity_limited;
-
-	if($this->is_donation == 1)
+     
+	 if($this->is_donation == 1)
 		$this->unit_price = $this->provided_price;
-	else
+	 else 
 		$this->unit_price = $price;
 
 	$this->total_price = $this->unit_price * $this->quantity;
@@ -1696,7 +1697,7 @@ function refresh_item() {
 
 	if(count($product_files) > 0) {
 		$this->file_id = null;
-		$this->is_downloadable = true;
+		$this->is_downloadable = false;
 	} else {
 		$this->file_id = null;
 		$this->is_downloadable = false;

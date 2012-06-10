@@ -1,5 +1,8 @@
 <?php
-global $wpsc_cart, $wpdb, $wpsc_checkout, $wpsc_gateway, $wpsc_coupons;
+
+global $wpsc_cart, $wpdb, $wpsc_checkout, $wpsc_gateway, $wpsc_coupons,$row,$current_user,$knc_co;
+
+ 
 $wpsc_checkout = new wpsc_checkout();
 $wpsc_gateway = new wpsc_gateways();
 $alt = 0;
@@ -10,6 +13,7 @@ if(wpsc_cart_item_count() < 1) :
    _e('Oops, there is nothing in your cart.', 'wpsc') . "<a href=".get_option("product_list_url").">" . __('Please visit our shop', 'wpsc') . "</a>";
    return;
 endif;
+
 ?>
 <div id="checkout_page_container">
 <h3><?php _e('Please review your order', 'wpsc'); ?></h3>
@@ -50,6 +54,16 @@ endif;
 				'is_donation' => 1
 			);
 			
+			//This code will check to see if there is any gift card in the cart, if there is donation will be removed. 
+			if(wpsc_cart_item_product_id() == 3441 || wpsc_cart_item_product_id() == 4975 || wpsc_cart_item_product_id() == 4959 || wpsc_cart_item_product_id() == 4976)
+		{
+		
+		$quantity = 0;
+	
+		}
+			
+			else
+			{
 			$quantity = (int) round($our_cart_total / 10.0);
 			//$provided_price = 6;
 			
@@ -67,6 +81,11 @@ endif;
 			//echo $result;
 			//wp_redirect("/");
 			//wpsc_add_to_cart();
+
+
+			}
+
+
 		}
 	
 	?>
@@ -168,9 +187,22 @@ endif;
             </form>
          </td>
       </tr-->
-	       
+	<?php if(wpsc_cart_item_product_id() == 3441 || wpsc_cart_item_product_id() == 4975 || wpsc_cart_item_product_id() == 4959 || wpsc_cart_item_product_id() == 4976){ ?>
+	<!-- Textbox get the coupon receiver email and then unpload the receiver’s email -->
+	 <td colspan="2"><?php _e('Enter the coupon receiver email', 'wpsc'); ?> :</td>      
+	<form  method="post" action="<?php echo get_option('shopping_cart_url'); ?>">	
+         <td  colspan="4" class="coupon_code">
+            	           
+			
 
-
+<input type="text" style="width:250px;" name="test_mail" id="test_mail" <?php if ($knc_gc_options['test_mode'] == "false")  { _e('disabled="true"', 'knc_gift_coupon'); }?> value="<?php _e($testMail, 'knc_gift_coupon'); ?>" />
+		<input type='hidden' name="update_knc_gc_settings" value="<?php _e($testMail, 'knc_gift_coupon'); ?>"/>
+			<input type="submit" name="update_knc_gc_settings" value="<?php _e('Upload', 'knc_gift_coupon') ?>" />
+</form>
+	<?php echo $_POST['use_email'];?>
+         </td>
+      </tr-->
+<?php } ?>
 
 	  <?php if(wpsc_uses_coupons() && (wpsc_coupon_amount(false) > 0)): ?>
 	      <tr class="total_price">
@@ -342,7 +374,7 @@ endif;
 			
 	        <fieldset class='wpsc_registration_form wpsc_right_registration'>
 	        	<h2><?php _e('Join up now', 'wpsc');?></h2>
-	    
+	      
 				<label><?php _e('Username', 'wpsc'); ?>:</label>
 				<input type="text" name="log" id="log" value="" size="20"/><br/>
 				
@@ -351,17 +383,11 @@ endif;
 				
 				<label><?php _e('E-mail', 'wpsc'); ?>:</label>
 	            <input type="text" name="user_email" id="user_email" value="<?php echo attribute_escape(stripslashes($user_email)); ?>" size="20" /><br />
-		 
-		<!-- <p>Thanks!</p> -->
-		
-		<!-- <input class="btn" name="register" value="Click to Register" /> -->
-		
+	            
 	            <div class="wpsc_signup_text"><?php _e('Signing up is free and easy! please fill out your details your registration will happen automatically as you checkout. Don\'t forget to use your details to login with next time!', 'wpsc');?></div>
 	        </fieldset>
 	        
         </div>
-
-
         <div class="clear"></div>
    <?php endif; // closes user login form
 
@@ -607,5 +633,29 @@ endif;
 <?php
 do_action('wpsc_bottom_of_shopping_cart');
 
+
 ?>
 
+<?php
+/* 
+ * Calling  KNC_GC_TABLE_ADMIN_OPTIONS table from database. 
+ * The table is serialized, so after calling it, the table needs to be unsterilized
+*/	
+global $wpdb;
+			
+$row = $wpdb->get_row( $wpdb->prepare( "SELECT admin_options FROM ". KNC_GC_TABLE_ADMIN_OPTIONS ) );
+$knc_gc_options = unserialize($row->admin_options);
+			
+// if found previously stored data then use that (basically re-update that)
+if (!empty($knc_gc_options)) {
+	foreach ($knc_gc_options as $key => $option)
+		$knc_gc_admin_options[$key] = $option;
+}
+if (isset($_POST['test_mail'])) {
+	$knc_gc_options['test_mail'] = $_POST['test_mail'];
+}	
+
+$knc_result = $wpdb->update( KNC_GC_TABLE_ADMIN_OPTIONS, array('admin_options' => serialize($knc_gc_options) ), array( 'blog_id' => 0 ) );// update the table after change email address
+
+
+?>

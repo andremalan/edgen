@@ -156,9 +156,15 @@ function wpsc_donations( $args = null ) {
 			$currency_sign_location = get_option( 'currency_sign_location' );
 			$currency_type = get_option( 'currency_type' );
 			$currency_symbol = $wpdb->get_var( "SELECT `symbol_html` FROM `" . WPSC_TABLE_CURRENCY_LIST . "` WHERE `id`='" . $currency_type . "' LIMIT 1" );
-			$price = get_post_meta(  $product['ID'] , '_wpsc_price', true );
+			$price = get_post_meta(  $product['ID'] , '_wpsc_price', true);
+
+
+
+
+
 			//ideahack, let's make the price a % of cart total value.
 			$price =  $cart_total * 0.1; 
+			
 
 			// Output
 			$output .= "<strong>" . $product['post_title'] . "</strong><br />";

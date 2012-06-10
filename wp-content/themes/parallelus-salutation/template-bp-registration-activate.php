@@ -17,7 +17,16 @@
 					<?php if ( isset( $_GET['e'] ) ) : ?>
 						<p><?php _e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'buddypress' ) ?></p>
 					<?php else : ?>
-						<p><?php _e( 'Your account was activated successfully! You can now log in with the username and password you provided when you signed up. Go ahead and click on the blue tab above to Sign In.', 'buddypress' ) ?></p>
+						<p>
+						<?php _e( 'Your account was activated successfully! You can now log in with the username and password you provided when you signed up. Go ahead and click on the blue tab above to Sign In.', 'buddypress' ) ?></p>
+						<!-- ideahack script to do tab slide down<script>
+							var ih_clicktosignin = document.getElementById('clicktosignin');
+							var ih_signintab = document.getElementById('Section-Tab-4e4od16scosg');
+							ih_clicktosignin.onclick = ih_signintab.setAttribute("class", 'active');			
+						// $('#clicktosignin').click(function(){
+						// 	$('#Section-Tab-4e4od16scosg').addClass('active');
+						// });
+						</script>	 -->		
 					<?php endif; ?>
 	
 				<?php else : ?>

@@ -1874,6 +1874,7 @@ function ih_quantity_display($the_product_id = 0, $in_cart = 1, $type = "product
 				if($i != 5){
 			 		echo '<option ' . $selected. ' value="' . $i * $total_before_donation * 0.01 . '">'.  $i . '</option>';
 				}
+				
 			}
 			
 				echo "</select>";

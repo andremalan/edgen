@@ -1,0 +1,36 @@
+.poll_item_no_head {
+width:30px;
+float:left;
+background-color:#000000;
+color:#ffffff;
+}
+
+.poll_question_head{
+width:320px;
+float:left;
+background-color:#000000;
+color:#ffffff;
+}
+
+.poll_active_head {
+width:120px;
+float:left;
+background-color:#000000;
+color:#ffffff;
+}
+
+.poll_item_no {
+width:30px;
+float:left;
+}
+
+
+.poll_question {
+width:320px;
+float:left;
+}
+
+.poll_active {
+width:120px;
+float:left;
+}

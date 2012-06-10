@@ -15,20 +15,31 @@
 // Search term entered
 
 
+// $student_sorting = get_post_meta(wpsc_the_product_id(), 'Expiration Date (yyyy/mm/dd)', true);
+// var_dump($student_sorting);
 
+//ideahack playing with the query
+global $wp_query;	
+	
 
 global $query_string;
 
 $query_args = explode("&", $query_string);
+
 $search_query = array();
 
 foreach($query_args as $key => $string) {
 	$query_split = explode("=", $string);
 	$search_query[$query_split[0]] = urldecode($query_split[1]);
+	
+
 } // foreach
 
+
 $search = new WP_Query($search_query);
+//var_dump($search);
 global $query_string;
+
 
 $image_width = get_option('product_image_width');
 /*
@@ -123,6 +134,7 @@ $image_width = get_option('product_image_width');
 								<?php
 								ih_display_urgent();
 								?>
+								
 							<?php endif; ?>
 						</h2>   
 				<?php if(wpsc_show_thumbnails()) :?>
@@ -137,7 +149,14 @@ $image_width = get_option('product_image_width');
 								<a href="<?php echo wpsc_the_product_permalink(); ?>">
 								<img class="no-image" id="product_image_<?php echo wpsc_the_product_id(); ?>" alt="No Image" title="<?php echo wpsc_the_product_title(); ?>" src="<?php echo WPSC_CORE_THEME_URL; ?>wpsc-images/noimage.png" width="<?php echo get_option('product_image_width'); ?>" height="<?php echo get_option('product_image_height'); ?>" />	
 								</a>
-						<?php endif; ?>
+								
+								
+								
+						<?php 						
+						endif; ?>
+						
+
+						
 						<?php
 						if(gold_cart_display_gallery()) :					
 							echo gold_shpcrt_display_gallery(wpsc_the_product_id(), true);
@@ -145,9 +164,10 @@ $image_width = get_option('product_image_width');
 						?>	
 					</div><!--close imagecol-->
 				<?php endif; ?>
+				
+				
 					<div class="productcol" style="margin-left:<?php echo $image_width + 20; ?>px;" >
-					
-						
+				
 						
 						<?php							
 							do_action('wpsc_product_before_description', wpsc_the_product_id(), $wp_query->post);

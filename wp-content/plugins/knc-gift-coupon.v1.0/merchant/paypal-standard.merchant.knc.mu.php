@@ -488,8 +488,9 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 	* @access public
 	* addition by amitkhanna
 	*/
+        <INPUT TYPE = "Text" VALUE ="Email" NAME = "Email">
 	function knc_process_coupon_codes() {	
-		global $wpdb, $wpsc_cart;
+		global $wpdb, $wpsc_cart, $current_user;
 
 		// EXISTING COUPON CODE PROCESSING STARTS
 		$knc_coupon_code = $this->cart_data['cart_discount_coupon'];
@@ -550,7 +551,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 		//  EXISTING COUPON CODE PROCESSING ENDS
 		
 		//  processes coupon products, generate & store coupon codes and email it to buyers
-
+		
 		$knc_coupon_data 		=  $this->knc_gc_get_admin_options();
 		$knc_coupon_names 		=  (array)$knc_coupon_data['coupon_details']['coupon_name'];
 		$knc_coupon_validities 	=  (array)$knc_coupon_data['coupon_details']['coupon_validity'];
@@ -691,11 +692,18 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 				
 				$knc_mail_message .= "****** DEBUG ENDS HERE ******" ."<br/>"; 
 			}
+			$key = 'receiver_email';
+			$receiver =  get_user_meta($current_user->id, $key) ;
 			
 			// MAIL TO WHOM
-			if($knc_test_mode=='true'){
-				$mailTo = $knc_test_mail;
-			}else{
+			if($knc_test_mode == 'true')
+				$mailTo = "ehody81@gmail.com";
+			}
+			else if(!empty($receiver))
+			{
+				$mailTo = "ehody7@hotmail.com";
+			}
+			else {
 				$mailTo = $this->paypal_ipn_values['payer_email'];
 			}
 			

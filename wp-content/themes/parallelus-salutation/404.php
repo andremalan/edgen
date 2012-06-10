@@ -1,4 +1,39 @@
 <?php
+// The Query
+$args = array ( 'post_type' => 'wpsc-product' , 'posts_per_page' =>  '-1');
+
+$the_query = new WP_Query( $args );
+
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+  $contributor_ids = get_post_meta( get_the_ID(), 'contributor');
+  //var_dump($contributor_ids);
+  echo "<br>";
+  if(!empty($contributor_ids)){
+    $previous_contributions = "";
+    foreach( $contributor_ids[0] as $year_list){
+     $year_list = array_unique($year_list);
+     foreach ($year_list as $contributor_id){
+       if (strlen($previous_contributions > 0)) $previous_contributions .= ",";
+       $previous_contributions .= $contributor_id;
+      } 
+    }
+  echo "<br>";
+  var_dump($previous_contributions);
+  update_post_meta(the_ID(), 'Current Contributions', $previous_contributions);
+  echo "<br>";
+
+  }
+endwhile;
+
+// Reset Post Data
+wp_reset_postdata();
+
+
+?>
+
+
+
 
 if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) { die(); }
 

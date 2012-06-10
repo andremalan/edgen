@@ -574,91 +574,136 @@ function wpsc_get_quarterly_summary() {
 	return $results;
 }
 
+/*
+ * Pie chart 
+ */
+function dashboard_piechart_function() {
+	
+echo '</div>';
+
+	
+	echo do_shortcode('[easychart type="pie" title="Free Clinic Medical Expenses" groupnames="Operating,Fundraising,Building,Pharmacy" group1values="12" group2values="13" group3values="5" group4values="23" chartfadecolor="FFFFFF"]');
+} 
+
 function wpsc_quarterly_dashboard_widget() {
 	if ( get_option( 'wpsc_business_year_start' ) == false ) {
 ?>
 		<form action='' method='post'>
 			<label for='date_start'><?php _e( 'Financial Year End' , 'wpsc' ); ?>: </label>
 			<input id='date_start' type='text' class='pickdate' size='11' value='<?php echo get_option( 'wpsc_last_date' ); ?>' name='add_start' />
-			   <!--<select name='add_start[day]'>
-<?php
-		for ( $i = 1; $i <= 31; ++$i ) {
-			$selected = '';
-			if ( $i == date( "d" ) ) {
-				$selected = "selected='selected'";
-			}
-			echo "<option $selected value='$i'>$i</option>";
-		}
-?>
-				   </select>
-		   <select name='add_start[month]'>
-	<?php
-		for ( $i = 1; $i <= 12; ++$i ) {
-			$selected = '';
-			if ( $i == (int)date( "m" ) ) {
-				$selected = "selected='selected'";
-			}
-			echo "<option $selected value='$i'>" . date( "M", mktime( 0, 0, 0, $i, 1, date( "Y" ) ) ) . "</option>";
-		}
-?>
-				   </select>
-		   <select name='add_start[year]'>
-	<?php
-		for ( $i = date( "Y" ); $i <= ( date( "Y" ) + 12 ); ++$i ) {
-			$selected = '';
-			if ( $i == date( "Y" ) ) {
-				$selected = "selected='true'";
-			}
-			echo "<option $selected value='$i'>" . $i . "</option>";
-		}
-?>
-				   </select>-->
+
 		<input type='hidden' name='wpsc_admin_action' value='wpsc_quarterly' />
 		<input type='submit' class='button primary' value='Submit' name='wpsc_submit' />
 	</form>
 <?php
-		if ( get_option( 'wpsc_first_quart' ) != '' ) {
-			$firstquarter = get_option( 'wpsc_first_quart' );
-			$secondquarter = get_option( 'wpsc_second_quart' );
-			$thirdquarter = get_option( 'wpsc_third_quart' );
-			$fourthquarter = get_option( 'wpsc_fourth_quart' );
-			$finalquarter = get_option( 'wpsc_final_quart' );
-			$revenue = wpsc_get_quarterly_summary();
-			$currsymbol = wpsc_get_currency_symbol();
-			foreach ( $revenue as $rev ) {
-				if ( $rev == '' ) {
-					$totals[] = '0.00';
-				} else {
-					$totals[] = $rev;
-				}
-			}
-?>
-			<div id='box'>
-				<p class='atglance'>
-					<span class='wpsc_quart_left'><?php _e( 'At a Glance' , 'wpsc' ); ?></span>
-					<span class='wpsc_quart_right'><?php _e( 'Revenue' , 'wpsc' ); ?></span>
-				</p>
-				<div style='clear:both'></div>
-				<p class='quarterly'>
-					<span class='wpsc_quart_left'><strong>01</strong>&nbsp; (<?php echo date( 'M Y', $thirdquarter ) . ' - ' . date( 'M Y', $fourthquarter ); ?>)</span>
-					<span class='wpsc_quart_right'><?php echo $currsymbol . ' ' . $totals[0]; ?></span></p>
-				<p class='quarterly'>
-					<span class='wpsc_quart_left'><strong>02</strong>&nbsp; (<?php echo date( 'M Y', $secondquarter ) . ' - ' . date( 'M Y', $thirdquarter ); ?>)</span>
-					<span class='wpsc_quart_right'><?php echo $currsymbol . ' ' . $totals[1]; ?></span></p>
-				<p class='quarterly'>
-					<span class='wpsc_quart_left'><strong>03</strong>&nbsp; (<?php echo date( 'M Y', $firstquarter ) . ' - ' . date( 'M Y', $secondquarter ); ?>)</span>
-					<span class='wpsc_quart_right'><?php echo $currsymbol . ' ' . $totals[2]; ?></span></p>
-				<p class='quarterly'>
-					<span class='wpsc_quart_left'><strong>04</strong>&nbsp; (<?php echo date( 'M Y', $finalquarter ) . ' - ' . date( 'M Y', $firstquarter ); ?>)</span>
-					<span class='wpsc_quart_right'><?php echo $currsymbol . ' ' . $totals[3]; ?></span>
-				</p>
-				<div style='clear:both'></div>
-			</div>
-<?php
+
+	//test start
+	global $wpdb;
+	$total_in_year;
+	$this_year = get_option( 'wpsc_last_date' ); //get current year and month
+	$this_month = 1;
+	$total_by_quarters;
+	
+	$months[] = mktime( 0, 0, 0, $this_month    , 3, $this_year ); //generate  unix time stamps fo 4 last months	
+	$months[] = mktime( 0, 0, 0, $this_month + 3, 3, $this_year );
+	$months[] = mktime( 0, 0, 0, $this_month + 6, 3, $this_year );	
+	$months[] = mktime( 0, 0, 0, $this_month + 9, 3, $this_year );
+
+	$products = $wpdb->get_results( "SELECT `cart`.`prodid`,
+	 `cart`.`name`
+	 FROM `" . WPSC_TABLE_CART_CONTENTS . "` AS `cart`
+	 INNER JOIN `" . WPSC_TABLE_PURCHASE_LOGS . "` AS `logs`
+	 ON `cart`.`purchaseid` = `logs`.`id`
+	 WHERE `logs`.`processed` >= 2
+	 AND `logs`.`date` >= " . $months[0] . "
+	 AND `logs`.`date` <= " . mktime( 0, 0, 0, $this_month + 12, 3, $this_year ) . "
+	 GROUP BY `cart`.`prodid`
+	 ORDER BY SUM(`cart`.`price` * `cart`.`quantity`) DESC
+	 LIMIT 20", ARRAY_A ); //get 4 products with top income in 4 last months.
+
+	$timeranges[0]["start"] = mktime( 0, 0, 0, $this_month , 3, $this_year ); //make array of time ranges
+	$timeranges[0]["end"] = mktime( 0, 0, 0, $this_month +3, 3, $this_year );
+	$timeranges[1]["start"] = mktime( 0, 0, 0, $this_month +3, 3, $this_year );
+	$timeranges[1]["end"] = mktime( 0, 0, 0, $this_month +6, 3, $this_year );
+	$timeranges[2]["start"] = mktime( 0, 0, 0, $this_month +6, 3, $this_year );
+	$timeranges[2]["end"] = mktime( 0, 0, 0, $this_month +9, 3, $this_year );
+	$timeranges[3]["start"] = mktime( 0, 0, 0, $this_month +9, 3, $this_year );
+	$timeranges[3]["end"] = mktime( 0, 0, 0, $this_month +12, 3, $this_year );
+	
+
+	$prod_data = array( );
+	foreach ( (array)$products as $product ) { //run through products and get each product income amounts and name
+		$sale_totals = array( );
+		foreach ( $timeranges as $timerange ) { //run through time ranges of product, and get its income over each time range
+			$prodsql = "SELECT
+			SUM(`cart`.`price` * `cart`.`quantity`) AS sum
+			FROM `" . WPSC_TABLE_CART_CONTENTS . "` AS `cart`
+			INNER JOIN `" . WPSC_TABLE_PURCHASE_LOGS . "` AS `logs`
+				ON `cart`.`purchaseid` = `logs`.`id`
+			WHERE `logs`.`processed` >= 2
+				AND `logs`.`date` >= " . $timerange["start"] . "
+				AND `logs`.`date` < " . $timerange["end"] . "
+				AND `cart`.`prodid` = " . $product['prodid'] . "
+			GROUP BY `cart`.`prodid`"; //get the amount of income that current product has generaterd over current time range
+			$sale_totals[] = $wpdb->get_var( $prodsql ); //push amount to array
 		}
+		$prod_data[] = array(
+			'sale_totals' => $sale_totals,
+			'product_name' => $product['name'] ); //result: array of 2: $prod_data[0] = array(income)
+		$sums = array( ); //reset array    //$prod_data[1] = product name
+	}
+	
+	$tablerow = 1;
+	ob_start();
+	?>
+	<div style="padding-bottom:15px; "></div>
+    <table style="width:100%" border="0" cellspacing="0">
+    	<tr style="font-style:italic; color:#666;" height="20">
+    		<td colspan="2" style=" font-family:\'Times New Roman\', Times, serif; font-size:15px; border-bottom:solid 1px #000;">
+			<?php _e('At a Glance (', 'wpsc'); echo $this_year. ')'; ?></td>
+
+			<td align="center" style=" font-family:\'Times New Roman\'; font-size:15px; border-bottom:solid 1px #000;"><?php echo 'Jan - Mar'; ?></td>		
+			<td align="center" style=" font-family:\'Times New Roman\'; font-size:15px; border-bottom:solid 1px #000;"><?php echo 'Apr - Jun'; ?></td>
+			<td align="center" style=" font-family:\'Times New Roman\'; font-size:15px; border-bottom:solid 1px #000;"><?php echo 'Jul - Sep'; ?></td>
+			<td align="center" style=" font-family:\'Times New Roman\'; font-size:15px; border-bottom:solid 1px #000;"><?php echo 'Oct - Dec'; ?></td>
+			<td colspan="2" align="center" style=" font-family:\'Times New Roman\', Times, serif; font-size:15px; border-bottom:solid 1px #000;">
+			<?php _e('Total', 'wpsc'); ?></td>
+		</tr>
+	<?php foreach ( (array)$prod_data as $sales_data ): ?>
+		<?php $i = 0;?>
+		<tr height="20">
+			<td width="20" style="font-weight:bold; color:#008080; border-bottom:solid 1px #000;"><?php echo $tablerow; ?></td>
+			<td style="border-bottom:solid 1px #000;width:60px"><?php echo $sales_data['product_name'];?></td>
+			<?php foreach ( $sales_data['sale_totals'] as $amount ): ?>			
+				<td align="center" style="border-bottom:solid 1px #000;">
+				<?php  $total_in_year += $amount; $total_by_quarters[$i] += $amount; ++$i;
+				if($amount > 0) { echo wpsc_currency_display($amount); }
+				else { echo '-'; }?></td>
+			<?php endforeach; ?>
+			<td align="center" style="border-bottom:solid 1px #000;"><?php echo wpsc_currency_display($total_in_year); $total_in_year = 0;?></td>
+		</tr>
+		<?php 
+		$tablerow++;
+		endforeach; ?>
+	<tr height="20" >
+	<?php $i = 0; $total_whole_year = 0?> 
+			<td width="20" style="font-weight:bold; color:#008080; border-bottom:solid 1px #000;"><?php '' ?></td>
+			<td style="font-weight:bold; font-size: 14px; border-bottom:solid 1px #000;width:60px"><?php echo 'Total' ?></td>
+			<?php foreach ( $sales_data['sale_totals'] as $amount ): ?>
+				<td align="center" style="font-weight:bold; font-size: 14px; border-bottom:solid 1px #000;"><?php echo wpsc_currency_display($total_by_quarters[$i]); $total_whole_year += $total_by_quarters[$i]; ++$i;?></td>
+			<?php endforeach; ?>
+			<td align="center" style="font-weight:bold; font-size: 14px; border-bottom:solid 1px #000;"><?php echo wpsc_currency_display($total_whole_year);?></td>
+		</tr>	
+		
+	</table>
+	<?php
+	ob_end_flush();
+	
+	echo do_shortcode('[easychart type="pie" title="" groupnames="Quarter 1,Quarter 2,Quarter 3,Quarter 4"
+	group1values="'.$total_by_quarters[0].'" group2values="'.$total_by_quarters[1].'" group3values="'.$total_by_quarters[2].'" group4values="'.$total_by_quarters[3].'" chartfadecolor="FFFFFF"]');
+	//dashboard_piechart_function(); //display pie chart
 	}
 }
-
 
 function wpsc_dashboard_widget() {
 	if ( current_user_can( 'manage_options' ) ) {
@@ -670,7 +715,6 @@ function wpsc_dashboard_widget() {
 /*
  * END - Dashboard Widget for 2.7
  */
-
 
 /*
  * Dashboard Widget Last Four Month Sales.
@@ -696,7 +740,7 @@ function wpsc_dashboard_4months_widget() {
 	 AND `logs`.`date` >= " . $months[0] . "
 	 GROUP BY `cart`.`prodid`
 	 ORDER BY SUM(`cart`.`price` * `cart`.`quantity`) DESC
-	 LIMIT 4", ARRAY_A ); //get 4 products with top income in 4 last months.
+	 LIMIT 20", ARRAY_A ); //get 4 products with top income in 4 last months.
 
 	$timeranges[0]["start"] = mktime( 0, 0, 0, $this_month - 3, 1, $this_year ); //make array of time ranges
 	$timeranges[0]["end"] = mktime( 0, 0, 0, $this_month - 2, 1, $this_year );
@@ -741,21 +785,37 @@ function wpsc_dashboard_4months_widget() {
 			<?php endforeach; ?>
 		</tr>
 	<?php foreach ( (array)$prod_data as $sales_data ): ?>
+	<?php $i = 0;?>
 		<tr height="20">
 			<td width="20" style="font-weight:bold; color:#008080; border-bottom:solid 1px #000;"><?php echo $tablerow; ?></td>
 			<td style="border-bottom:solid 1px #000;width:60px"><?php echo $sales_data['product_name']; ?></td>
 			<?php foreach ( $sales_data['sale_totals'] as $amount ): ?>
-				<td align="center" style="border-bottom:solid 1px #000;"><?php echo wpsc_currency_display($amount); ?></td>
+			
+				<td align="center" style="border-bottom:solid 1px #000;">
+				<?php  $total_in_4month += $amount; $total_by_months[$i] += $amount; ++$i;
+				if($amount > 0) { echo wpsc_currency_display($amount); }
+				else { echo '-'; }?></td>			
+			
+			
 			<?php endforeach; ?>
 		</tr>
 		<?php 
 		$tablerow++;
 		endforeach; ?>
+			<tr height="20" >
+	<?php $i = 0;?> 
+			<td width="20" style="font-weight:bold; color:#008080; border-bottom:solid 1px #000;"><?php '' ?></td>
+			<td style="font-weight:bold; font-size: 14px; border-bottom:solid 1px #000;width:60px"><?php echo 'Total' ?></td>
+			<?php foreach ( $sales_data['sale_totals'] as $amount ): ?>
+				<td align="center" style="font-weight:bold; font-size: 14px; border-bottom:solid 1px #000;"><?php echo wpsc_currency_display($total_by_months[$i]); ++$i;?></td>
+			<?php endforeach; ?>
+		</tr>	
 	</table>
 	<?php
 	ob_end_flush();
+		echo do_shortcode('[easychart type="pie" title="" groupnames="Month 1,Month 2,Month 3,Month 4"
+	group1values="'.$total_by_months[0].'" group2values="'.$total_by_months[1].'" group3values="'.$total_by_months[2].'" group4values="'.$total_by_months[3].'" chartfadecolor="FFFFFF"]');
 }
-
 
 //Modification to allow for multiple column layout
 

@@ -63,7 +63,15 @@ if ($customCSS = get_theme_var('design_setting,css_custom')) :
 	echo prep_content($customCSS); 
 endif;
 ?>
-</style> <?php 
+</style> 
+
+<!-- facebook custom og: meta tags for sharing contributions -->
+<meta property="og:title" content="I just contributed on Education Generation!" />
+<meta property="og:description" content="I just contributed to a student on Education Generation! Education Generation is a global community providing access to quality education for high potential students. Through their online platform, individuals from around the world make contributions as low as $20 to collectively support individual students. 100% of your money (after paypal fees) supports their studies."/>
+<meta property="og:image" content="http://educationgeneration.org/wp-content/uploads/2011/10/logo.png" />
+
+
+<?php 
 
  
 // Custom JavaScript entered in design settings

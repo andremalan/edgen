@@ -13,7 +13,26 @@
   * KNC version: 1.0
   * last updated: 1-11-2011
   */
-  
+global $current_user,$email;
+
+get_currentuserinfo();  
+
+$key = 'user_email';
+
+$rece =  get_user_meta($current_user->id, $key,true) ;
+
+if(!empty($rece))
+{
+          $ke = $rece;
+	define("recmail", $ke);
+	
+}
+else
+{
+	$dump = $rece;
+}
+//echo $rece;
+
 $nzshpcrt_gateways[$num] = array(
 	'name' => 'PayPal Payments Standard Knc Mu',
 	'api_version' => 2.0,
@@ -51,6 +70,7 @@ $nzshpcrt_gateways[$num] = array(
 	else if ( !empty( $table_prefix ) )
 		$wp_table_prefix = $table_prefix;
 	define('KNC_TABLE_COUPON_CODES', "{$wp_table_prefix}knc_gc_details");
+	define('KNC_GC_TABLE_ADMIN_EMAIL' ,  "{$wp_table_prefix}users");
 
 
 /**
@@ -65,16 +85,45 @@ $nzshpcrt_gateways[$num] = array(
 class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
   var $name = 'PayPal Payments Standard';
   var $paypal_ipn_values = array();
-
+  //var $classvar = recmail ;
+  var $classvar = array();
 	/**
 	* construct value array method, converts the data gathered by the base class code to something acceptable to the gateway
 	* @access public
 	*/
 	function construct_value_array() {
 		$this->collected_gateway_data = $this->_construct_value_array();
+		$classvar['recmail'] = recmail;
+		
+		
+	}
+	function knc_gc_get_email()
+	{
+		$classvar['recmail'] = recmail;
+		
+		return $classvar['recmail'];
 	}
 	
+	function knc_gc_get_admin_email() {
+
+		global $wpdb;
+		
+		$row = $wpdb->get_var("SELECT `code` FROM `".KNC_GC_TABLE_ADMIN_EMAIL."` WHERE `ID`='".$this->$classvar['recmail'] ."' LIMIT 1");	
+		//wp_mail('ehody7@hotmail.com', "the id of current user", "the id is " . $row);
+	          //$knc_gc_options = unserialize($row->admin_options);
+		// if found previously stored data then use that (basically re-update that)
+		//if (!empty($knc_gc_options)) {
+		if (!empty($row)) {
+			foreach ($row as $key => $option)
+			{
+				$knc_gc_admin_email[$key] = $option;
+			}
+		}	
+
+		return $row;
+	}
 	function convert( $amt ){
+		
 		if ( empty( $this->rate ) ) {
 			$this->rate = 1;
 			$paypal_currency_code = $this->get_paypal_currency_code();
@@ -141,6 +190,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 			$paypal_vars += array(
 				'notify_url' => $notify_url,
 			);
+			
 		}
 
 		// Shipping
@@ -161,6 +211,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 			'country' => $this->cart_data['shipping_address']['country'],
 			'zip' => $this->cart_data['shipping_address']['post_code'],
 			'state' => $this->cart_data['shipping_address']['state'],
+			 
 		);
 		
 		if ( $paypal_vars['country'] == 'UK' ) {
@@ -332,6 +383,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 
 		return $paypal_vars;
 	}
+	
 
 	/**
 	* submit method, sends the received data to the payment gateway
@@ -341,10 +393,10 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 		
 		// get cart total
 		$cart_total = wpsc_cart_total(false);
-
+		
 		// if there is no shipping &  disc == subtotal
 		if($cart_total==0){
-		
+			
 			$name_value_pairs = array();
 			foreach ($this->collected_gateway_data as $key => $value) {
 				$name_value_pairs[] = $key . '=' . urlencode($value);
@@ -352,14 +404,16 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 					$knc_session_id = $value;
 				}
 			}
-			$_SESSION['knc_transaction_type'] = 'local';
+			
+			//$_SESSION['knc_transaction_type'] = 'local';
 			$this->paypal_ipn_values = $this->_construct_value_array();
 			
-			//var_dump($this->paypal_ipn_values);
-			//exit();
+			var_dump($this);
+			exit();
 			
 			$knc_txn_id = strtoupper($this->knc_random_alpha_numeric(17));
 			$this->set_transaction_details($knc_txn_id, 3); // mark order as "Accepted Payment" by updating database
+			
 			$this->knc_process_coupon_codes(); // generate coupon codes if any & manage existing code's usage
 
 			// LOCAL TRANSACTION - NO PAYPAL
@@ -372,6 +426,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 		//global $wpsc_cart;
 		//$cart_shipping = $wpsc_cart->calculate_total_shipping();
 		//var_dump($wpsc_cart->calculate_subtotal());
+		
 			$_SESSION['knc_transaction_type'] = 'remote';
 			
 			$name_value_pairs = array();
@@ -379,7 +434,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 				$name_value_pairs[] = $key . '=' . urlencode($value);
 			}
 			$gateway_values =  implode('&', $name_value_pairs);
-
+			
 			$redirect = get_option('paypal_multiple_url')."?".$gateway_values;
 			// URLs up to 2083 characters long are short enough for an HTTP GET in all browsers.
 			// Longer URLs require us to send aggregate cart data to PayPal short of losing data.
@@ -390,7 +445,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 					$name_value_pairs[]= $key . '=' . urlencode($value);
 				}
 				$gateway_values =  implode('&', $name_value_pairs);
-
+				
 				$redirect = get_option('paypal_multiple_url')."?".$gateway_values;
 			}
 
@@ -413,6 +468,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 	*/
 	function parse_gateway_notification() {
 		/// PayPal first expects the IPN variables to be returned to it within 30 seconds, so we do this first.
+
 		$paypal_url = get_option('paypal_multiple_url');
 		$received_values = array();
 		$received_values['cmd'] = '_notify-validate';
@@ -471,7 +527,6 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 		
 		$row = $wpdb->get_row( $wpdb->prepare( "SELECT admin_options FROM ". KNC_GC_TABLE_ADMIN_OPTIONS ) );
 		$knc_gc_options = unserialize($row->admin_options);
-		
 		// if found previously stored data then use that (basically re-update that)
 		if (!empty($knc_gc_options)) {
 			foreach ($knc_gc_options as $key => $option)
@@ -489,8 +544,10 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 	* addition by amitkhanna
 	*/
 	function knc_process_coupon_codes() {	
-		global $wpdb, $wpsc_cart;
-
+ 		global $wpdb, $wpsc_cart ;
+		
+		//$e = get_option('user_email');
+		
 		// EXISTING COUPON CODE PROCESSING STARTS
 		$knc_coupon_code = $this->cart_data['cart_discount_coupon'];
 		$knc_applied_discount = $this->cart_data['cart_discount_value'];
@@ -572,7 +629,6 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 		$use_once 				= 0;
 		$every_product			= 0;
 		$start_date 			= date('Y-m-d') . " 00:00:00";
-		
 		$i = 1;
 		
 		//var_dump($this->paypal_ipn_values);
@@ -694,7 +750,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 			
 			// MAIL TO WHOM
 			if($knc_test_mode=='true'){
-				$mailTo = $knc_test_mail;
+				$mailTo =  $knc_test_mail;
 			}else{
 				$mailTo = $this->paypal_ipn_values['payer_email'];
 			}
@@ -729,6 +785,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
 	*/
 	function process_gateway_notification() {
 		
+
 	  // Compare the received store owner email address to the set one
 		if(strtolower($this->paypal_ipn_values['receiver_email']) == strtolower(get_option('paypal_multiple_business'))) {
 			switch($this->paypal_ipn_values['txn_type']) {
@@ -815,6 +872,7 @@ class wpsc_merchant_paypal_standard_knc_mu extends wpsc_merchant {
  * @return void
  */
 function knc_submit_paypal_multiple(){
+  
   if(isset($_POST['paypal_multiple_business'])) {
     update_option('paypal_multiple_business', $_POST['paypal_multiple_business']);
 	}
@@ -861,6 +919,7 @@ function knc_submit_paypal_multiple(){
  */
 function knc_form_paypal_multiple() {
   global $wpdb, $wpsc_gateways;
+  
   $output = "
   <tr>
       <td>Username:

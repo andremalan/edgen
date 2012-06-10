@@ -176,5 +176,169 @@ $image_height = get_option('product_image_height');
 	<?php endif; ?>
 	
     <?php do_action( 'wpsc_theme_footer' ); ?> 	
+		
+		
+		
+<?php
+		// The Query
+		
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'akilah',
+	'order'    => 'ASC'
+);
+		
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', 'Akilah Institute for Women' );
+	the_title();
+endwhile;
 
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'create-change',
+	'order'    => 'ASC'
+);
+		
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', 'Create Change Foundation' );
+	the_title();
+endwhile;
+
+
+
+		// The Query
+		
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'educate',
+	'order'    => 'ASC'
+);
+		
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', ' Educate!' );
+	the_title();
+endwhile;
+
+		// The Query
+		
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'huggs',
+	'order'    => 'ASC'
+);
+		
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', 'HUGGS' );
+	the_title();
+endwhile;
+
+
+
+//the Query
+
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'maria-helena',
+	'order'    => 'ASC'
+);
+	
+
+	
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', 'Maria Helena Foundation' );
+	the_title();
+endwhile;
+
+
+//the Query
+
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'cilf',
+	'order'    => 'ASC'
+);
+	
+
+	
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', 'The Canadian International Learning Foundation' );
+	the_title();
+endwhile;
+
+//the Query
+
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'seed',
+	'order'    => 'ASC'
+);
+	
+
+	
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', 'SEED' );
+	the_title();
+endwhile;
+
+//the Query
+
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'rose',
+	'order'    => 'ASC'
+);
+	
+
+	
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', 'Rose Charities Canada' );
+	the_title();
+endwhile;
+
+//the Query
+
+		$args =  array(
+	'posts_per_page'=> '-1',
+	'post_type' => 'wpsc-product',
+	'wpsc_product_category'    => 'mosqoy',
+	'order'    => 'ASC'
+);
+	
+
+	
+$the_query = new WP_Query($args);
+// The Loop
+while ( $the_query->have_posts() ) : $the_query->the_post();
+	update_post_meta(get_the_ID(), 'Partner', 'Mosqoy Foundation' );
+	the_title();
+endwhile;
+		
+
+?>
+		
+		
 </div><!--close grid_view_products_page_container-->
