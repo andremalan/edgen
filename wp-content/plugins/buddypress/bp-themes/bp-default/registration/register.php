@@ -228,7 +228,8 @@
 			<?php if ( 'completed-confirmation' == bp_get_current_signup_step() ) : ?>
 
 				<h2><?php _e( 'Sign Up Complete!', 'buddypress' ) ?></h2>
-
+				
+			
 				<?php do_action( 'template_notices' ) ?>
 				<?php do_action( 'bp_before_registration_confirmed' ) ?>
 

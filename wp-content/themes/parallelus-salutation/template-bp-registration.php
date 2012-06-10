@@ -218,6 +218,23 @@
 				
 				<h2><?php _e( 'Sign Up Complete!', 'buddypress' ) ?></h2>
 
+				<?php 
+
+					if ( wpsc_cart_item_count() > 0 ) {
+		
+						?>
+					<script>
+						
+						// ideahack	redirectis students in cart
+						window.location.assign("/students/checkout");
+			
+					</script>
+				<?php
+		
+					}
+
+				?>
+
 				<?php do_action( 'template_notices' ) ?>
 					<p><?php echo "You have successfully created your account! Now you can browse our <a href='" . site_url("students") . "'>amazing students</a>"; ?></p>
 
