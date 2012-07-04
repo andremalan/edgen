@@ -830,11 +830,13 @@ if ( ! function_exists( 'display_slideShow' ) ) :
 					$area_of_study = get_post_meta(get_the_ID(), 'Program Title', true);
 					$funding_needed = get_post_meta(get_the_ID(), 'Funding Needed', true);							
     				$raised = get_post_meta(get_the_ID(), 'Funding Received', true);
+          			$student_age = get_post_meta(get_the_ID(), 'Birth Date (yyyy/mm/dd)', true); 
 					$funding_deadline = get_post_meta(get_the_ID(), 'Expiration Date (yyyy/mm/dd)', true);
-    				$progress = (($raised + 1.0) /$funding_needed) *100;
+    		  		$progress = (($raised + 1.0) /$funding_needed) *100;
 					//$excerpt = get_the_excerpt();	
 					$excerpt = substr(get_the_excerpt(), 0, 300);
 									
+          			$student_age = age_from_birth_date($student_age); 
 					$studentexpdate = get_post_meta(wpsc_the_product_id(), 'Expiration Date (yyyy/mm/dd)', true);						
 					$today_date = date('Y/m/d');
 					$days_to_expiration = (strtotime($studentexpdate) - strtotime($today_date)) / 86400;
@@ -869,7 +871,7 @@ if ( ! function_exists( 'display_slideShow' ) ) :
 								<div id='student_name'><strong>Name: </strong>$name</div>
 								<div id='country'><strong>Country:</strong> $country</div>
 								<div id='areaofstudy'><strong>Area of Study: </strong> $area_of_study</div>
-								
+								<div id='age'><strong>Age: </strong> $student_age</div>
 								<div id='featured_excerpt'>$excerpt</div>
 								<div id='deadline'><strong>Funding Deadline:</strong>  $funding_deadline </div>
 								<div id='donate'>

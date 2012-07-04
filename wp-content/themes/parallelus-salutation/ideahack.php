@@ -332,9 +332,37 @@ function ih_combine_contributors($student_id){
    update_post_meta($student_id, 'Previous Contributions', $previous_contributions);
 }
 
+
+
 function ih_deactivate_student($student_id){
    update_post_meta($student_id,  'Active', 'false');
-   wp_mail("raden.andre@gmail.com", '[edgen_system] Student Deactivated', get_the_title($student_id) . " has been deactivated");
+   ih_increment_scholarship_count();
+   wp_mail("info@educationgeneration.org", '[edgen_system] Student Deactivated', get_the_title($student_id) . " has been deactivated");
+}
+
+function ih_increment_scholarship_count(){
+  $scholarship_count = get_option( "scholarship_count" );
+  $scholarship_count++;
+  update_option( "scholarship_count", $scholarship_count);
+}
+
+add_shortcode( 'student_scholarship_count', 'ih_display_scholarship_count' );
+
+function ih_display_scholarship_count($atts){
+  $scholarship_count = get_option( "scholarship_count" );
+  echo "<h4>We have funded <a href='http://educationgeneration.org/students'><span style='color:#ed1c24;'>$scholarship_count</span></a> scholarships to date!</h4>";
+}
+
+function age_from_birth_date($dob) {
+
+      list($day,$month,$year) = explode('/', $dob);
+          
+          if (($month = (date('m') - $month)) < 0) {
+                    $year++;
+                        } elseif ($month == 0 && date('d') - $day < 0) {
+                                  $year++;
+                                      }
+          return $year;
 }
 
 function ih_disable_validation( $user_id ) {

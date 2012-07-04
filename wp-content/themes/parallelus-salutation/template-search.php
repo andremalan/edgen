@@ -109,7 +109,7 @@ $image_width = get_option('product_image_width');
 		$expiration_date = get_post_meta(wpsc_the_product_id(), 'Expiration Date (yyyy/mm/dd)', true);
 		
 		$expiration_date = strtotime($expiration_date);
-		$current_date = strtotime(date("Y/m/d"));
+		$current_date = time()- 36000;
     if(($current_date > $expiration_date) && (get_post_meta(wpsc_the_product_id(),"Active", true) == "true")){
       ih_deactivate_student(wpsc_the_product_id());
     }
@@ -310,6 +310,7 @@ $image_width = get_option('product_image_width');
 			<div class="wpsc_page_numbers_bottom">
 			<?php  previous_posts_link(); ?>
 				<?php next_posts_link("Next Page");?>
+				<?php echo "of a total of " . $wp_query->found_posts . " students"; ?>
 			</div><!--close wpsc_page_numbers_bottom-->
 		<?php endif; ?>
 	<?php endif; ?>

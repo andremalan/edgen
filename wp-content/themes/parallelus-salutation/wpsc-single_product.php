@@ -171,10 +171,15 @@
 
                     									$funding_needed = get_post_meta(wpsc_the_product_id(), 'Funding Needed', true);					
 
+                    									$student_age = get_post_meta(get_the_ID(), 'Birth Date (yyyy/mm/dd)', true); 
+          												$student_age = age_from_birth_date($student_age); 
+
                     									if ( $birthdate != "" )
                     										echo "<div id='birthdate'><strong>Birthdate:</strong> " . $birthdate . "</div>";
                     									if ( $country != "" )
                     										echo "<div id='country'><strong>Country:</strong> " . $country . "</div>";
+                    									if ( $student_age != "" )
+                    										echo "<div id='age'><strong>Age:</strong> " . $student_age . "</div>";
                     									if ( $area_of_study != "" )
                     										echo "<div id='areaofstudy'><strong>Area of Study:</strong> " . $area_of_study . "</div>";
                     									if ( $funding_deadline != "" )
