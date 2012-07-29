@@ -107,9 +107,8 @@ $image_width = get_option('product_image_width');
 		<?php while (wpsc_have_products()) :  wpsc_the_product(); ?>
 		<?php //unpublish and ignore products where expiration date has past.
 		$expiration_date = get_post_meta(wpsc_the_product_id(), 'Expiration Date (yyyy/mm/dd)', true);
-		
-		$expiration_date = strtotime($expiration_date);
-		$current_date = time()- 36000;
+		$expiration_date = strtotime($expiration_date) + 122400; //take expiration from gmt previous day to 3am PST on actual date
+		$current_date = time();
     if(($current_date > $expiration_date) && (get_post_meta(wpsc_the_product_id(),"Active", true) == "true")){
       ih_deactivate_student(wpsc_the_product_id());
     }
