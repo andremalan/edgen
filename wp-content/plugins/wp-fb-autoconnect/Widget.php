@@ -26,52 +26,39 @@ class Widget_LoginLogout extends WP_Widget
         //If logged in, show "Welcome, User!"
         if( is_user_logged_in() ):
         ?>
-            <div style='text-align:center; font-size:17px;'>
-	      	<?php 
-    			$userdata = wp_get_current_user();
+            <div style='text-align:center'>
+              <?php 
+                $userdata = wp_get_current_user();
                 echo __('Welcome') . ', ' . $userdata->display_name;
               ?>!<br />
-              <!-- <small> -->
-				
-				<?php
-					$the_url = get_bloginfo('home') .'/'. BP_MEMBERS_SLUG .'/'. $userdata -> user_login;
-				?>
-	            <a href="<?php echo $the_url ?>"><?php _e("View Profile")?></a> | <a href=" <?php echo wp_logout_url( $_SERVER['REQUEST_URI'] )?>"><?php _e("Logout")?></a>
-                <!-- <a href="<?php // echo get_option('siteurl')?>/wp-admin/profile.php"><?php //_e("Edit Profile")?></a> | <a href=" <?php // echo wp_logout_url( $_SERVER['REQUEST_URI'] )?>"><?php //_e("Logout")?></a> -->
-              <!-- </small> -->
+              <small>
+                <a href="<?php echo get_option('siteurl')?>/wp-admin/profile.php"><?php _e("Edit Profile")?></a> | <a href=" <?php echo wp_logout_url( $_SERVER['REQUEST_URI'] )?>"><?php _e("Logout")?></a>
+              </small>
             </div>
         <?php
         //Otherwise, show the login form (with Facebook Connect button)
         else:
-        
-		global $opt_jfb_hide_button;
-        if( !get_option($opt_jfb_hide_button) )
-        {
-            jfb_output_facebook_btn();
-            //jfb_output_facebook_init(); This is output in wp_footer as of 1.5.4
-            //jfb_output_facebook_callback(); This is output in wp_footer as of 1.9.0
-        }
-		?>
-		<!--
-            <form name='loginform' id='loginform' action='<?php //echo get_option('siteurl')?>/wp-login.php' method='post'>
-                <label>Username:</label><br />
+        ?>
+            <form name='loginform' id='loginform' action='<?php echo get_option('siteurl')?>/wp-login.php' method='post'>
+                <label>User:</label><br />
                 <input type='text' name='log' id='user_login' class='input' tabindex='20' /><input type='submit' name='wp-submit' id='wp-submit' value='Login' tabindex='23' /><br />
-                <label>Password:</label><br />
+                <label>Pass:</label><br />
                 <input type='password' name='pwd' id='user_pass' class='input' tabindex='21' />
-                <br/><span id="forgotText"><a href="<?php// echo get_option('siteurl')?>/wp-login.php?action=lostpassword" rel="nofollow" ><?php// _e('Forgot')?>?</a></span><br />
+                <span id="forgotText"><a href="<?php echo get_option('siteurl')?>/wp-login.php?action=lostpassword" rel="nofollow" ><?php _e('Forgot')?>?</a></span><br />
                 <?php //echo "<input name='rememberme' type='hidden' id='rememberme' value='forever' />";?>
-                <?php //echo wp_register('',''); ?>
-                <input type='hidden' name='redirect_to' value='<?php //echo htmlspecialchars($_SERVER['REQUEST_URI'])?>' />
+                <?php echo wp_register('',''); ?>
+                <input type='hidden' name='redirect_to' value='<?php echo htmlspecialchars($_SERVER['REQUEST_URI'])?>' />
             </form>
-			-->
             <?php
+            global $opt_jfb_hide_button;
+            if( !get_option($opt_jfb_hide_button) )
+            {
+                jfb_output_facebook_btn();
+                //jfb_output_facebook_init(); This is output in wp_footer as of 1.5.4
+                //jfb_output_facebook_callback(); This is output in wp_footer as of 1.9.0
+            }
         endif;
         echo $after_widget;
-		?>
-		<div style="margin-bottom:42px;">&nbsp;</div>
-		
-		
-		<?php
     }
     
     

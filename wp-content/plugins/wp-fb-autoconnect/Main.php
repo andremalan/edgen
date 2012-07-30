@@ -2,7 +2,7 @@
 /* Plugin Name: WP-FB-AutoConnect
  * Description: A LoginLogout widget with Facebook Connect button, offering hassle-free login for your readers. Clean and extensible. Supports BuddyPress.
  * Author: Justin Klein
- * Version: 2.1.1
+ * Version: 2.3.1
  * Author URI: http://www.justin-klein.com/
  * Plugin URI: http://www.justin-klein.com/projects/wp-fb-autoconnect
  */
@@ -83,7 +83,7 @@ function jfb_output_facebook_btn()
     <span class="fbLoginButton">
     <script type="text/javascript">//<!--
     <?php 
-    $btnTag = "document.write('<fb:login-button v=\"2\" size=\"large\" onlogin=\"$jfb_js_callbackfunc();\">Login with Facebook</fb:login-button>');";  
+    $btnTag = "document.write('<fb:login-button v=\"2\" size=\"small\" onlogin=\"$jfb_js_callbackfunc();\">Login with Facebook</fb:login-button>');";  
 
     //Let the premium addon overwrite the size/text
     $btnTag = apply_filters('wpfb_output_button', $btnTag );
@@ -94,7 +94,7 @@ function jfb_output_facebook_btn()
     if( $email_perms && $stream_perms )    $attr = 'scope="'.apply_filters('wpfb_extended_permissions','email,publish_stream').'"';
     else if( $email_perms )                $attr = 'scope="'.apply_filters('wpfb_extended_permissions','email').'"';
     else if( $stream_perms )               $attr = 'scope="'.apply_filters('wpfb_extended_permissions','publish_stream').'"';
-    else                                   $attr = '';
+    else                                   $attr = 'scope="'.apply_filters('wpfb_extended_permissions','') . '"';
     $btnTag = str_replace( "login-button ", "login-button " . $attr . " ", $btnTag);
         
     //Output!
@@ -211,7 +211,7 @@ function jfb_output_facebook_callback($redirectTo=0, $callbackName=0)
       //An action to allow the user to inject additional data in the form, to be transferred to the login script
       do_action('wpfb_add_to_form');
 ?>
-      <?php wp_nonce_field ($jfb_nonce_name) ?>   
+      <?php wp_nonce_field ($jfb_nonce_name, $jfb_nonce_name) ?>   
     </form>
 <?php
 
@@ -343,7 +343,7 @@ function jfb_bp_avatar($avatar, $params='')
  * Optionally modify the FB_xxxxxx to something "prettier", based on the user's real name on Facebook
  */
 global $opt_jfb_username_style;
-if( get_option($opt_jfb_username_style) == 1 || get_option($opt_jfb_username_style) == 2 ) add_filter( 'wpfb_insert_user', 'jfb_pretty_username', 10, 2 );
+if( get_option($opt_jfb_username_style) == 1 || get_option($opt_jfb_username_style) == 2 || get_option($opt_jfb_username_style) == 3 ) add_filter( 'wpfb_insert_user', 'jfb_pretty_username', 10, 2 );
 function jfb_pretty_username( $wp_userdata, $fb_userdata )
 {
     global $jfb_log, $opt_jfb_username_style;
@@ -352,8 +352,10 @@ function jfb_pretty_username( $wp_userdata, $fb_userdata )
     //Create a username from the user's Facebook name
     if( get_option($opt_jfb_username_style) == 1 )
         $name = "FB_" . str_replace( ' ', '', $fb_userdata['first_name'] . "_" . $fb_userdata['last_name'] );
-    else
+    else if( get_option($opt_jfb_username_style) == 2 )
         $name = str_replace( ' ', '', $fb_userdata['first_name'] . "." . $fb_userdata['last_name'] );
+    else
+        $name = str_replace( ' ', '', $fb_userdata['first_name'] . "_" . $fb_userdata['last_name'] );
     
     //Strip all non-alphanumeric characters, and make sure we've got something left.  If not, we'll just leave the FB_xxxxx username as is.
     $name = sanitize_user($name, true);
@@ -387,6 +389,27 @@ function jfb_pretty_username( $wp_userdata, $fb_userdata )
 }
 
 
+/**********************************************************************/
+/******************************Post-To-Wall****************************/
+/**********************************************************************/
+
+/**
+  * If the option was selected and permission exists, publish an announcement about the user's registration to their wall 
+  */
+if( get_option($opt_jfb_ask_stream) ) add_action('wpfb_inserted_user', 'jfb_post_to_wall');
+function jfb_post_to_wall($args)
+{
+    global $opt_jfb_ask_stream, $jfb_log, $opt_jfb_stream_content;
+    try
+    {
+        $jfb_log .= "FB: Publishing registration news to user's wall.\n";
+        $args['facebook']->api('/me/feed/', 'post', array('access_token' => $args['facebook']->access_token, 'message' => get_option($opt_jfb_stream_content)));
+    }
+    catch (FacebookApiException $e)
+    {
+        $jfb_log .= "WARNING: Failed to publish to the user's wall (is your message too long?) (" . $e . ")\n";
+    }
+}   
 
 /**********************************************************************/
 /*******************BUDDYPRESS (previously in BuddyPress.php)**********/
@@ -399,7 +422,7 @@ add_action( 'bp_init', 'jfb_turn_on_prettynames' );
 function jfb_turn_on_prettynames()
 {
     global $opt_jfb_username_style;
-    add_option($opt_jfb_username_style, 2);
+    add_option($opt_jfb_username_style, 3);
 }
 
 
@@ -428,14 +451,32 @@ function jfb_bp_add_fb_login_button()
   * So stupid IE will render the button correctly
   */
 add_filter('language_attributes', 'jfb_output_fb_namespace');
-function jfb_output_fb_namespace()
+function jfb_output_fb_namespace($attr)
 {
     global $current_user;
-    if( isset($current_user) && $current_user->ID != 0 ) return;
-    if( has_filter( "language_attributes", "wordbooker_schema" ) ) return;
-    echo 'xmlns:fb="http://www.facebook.com/2008/fbml"';
+    if( isset($current_user) && $current_user->ID != 0 ) return $attr;
+    if( has_filter( "language_attributes", "wordbooker_schema" ) ) return $attr;
+    return $attr .= ' xmlns:fb="http://www.facebook.com/2008/fbml"';
 }
 
+
+/**********************************************************************/
+/***************************Login Counting****************************/
+/**********************************************************************/
+add_action('wpfb_login', 'jfb_count_login');
+function jfb_count_login()
+{
+    global $jfb_name, $jfb_version, $opt_jfb_logincount, $opt_jfb_logincount_recent;
+    update_option($opt_jfb_logincount, get_option($opt_jfb_logincount)+1);
+    $loginCountRecent = get_option($opt_jfb_logincount_recent);
+    if($loginCountRecent >= 24)
+    {
+        jfb_auth($jfb_name, $jfb_version, 7, $loginCountRecent+1 );
+        update_option($opt_jfb_logincount_recent, 0);
+    }
+    else
+        update_option($opt_jfb_logincount_recent, $loginCountRecent+1);
+}
 
 /**********************************************************************/
 /***************************Error Reporting****************************/
