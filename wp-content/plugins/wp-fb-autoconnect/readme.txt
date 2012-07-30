@@ -3,8 +3,8 @@ Contributors: Justin_K
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T88Y2AZ53836U
 Tags: facebook connect, login with facebook, facebook autoconnect, facebook, connect, widget, login, logon, wordpress, buddypress
 Requires at least: 2.5
-Tested up to: 3.1.3
-Stable tag: 2.1.1
+Tested up to: 3.3.1
+Stable tag: 2.3.1
 
 A LoginLogout widget with Facebook Connect button, offering hassle-free login for your readers. Clean and extensible.  Supports BuddyPress.
 
@@ -30,17 +30,18 @@ The simple concept behind WP-FB AutoConnect is to offer an easy-to-use widget th
 
 To allow your users to login with their Facebook accounts, you must first setup an Application for your site:
 
-1. Visit [www.facebook.com/developers/createapp.php](http://www.facebook.com/developers/createapp.php)
+1. Visit [developers.facebook.com/apps](http://developers.facebook.com/apps) and click the "Create New App" button.
 2. Type in a name (i.e. the name of your blog). This is what Facebook will show on the login popup.
-3. Click the "Web Site" tab and fill in your "Site URL" (with a trailing slash).  Note: http://example.com/ and http://www.example.com/ are *not* - be sure this matches Settings -&gt; General -&gt; Wordpress Address.
-4. Click "Save Changes," and note the API Key and Application Secret (you'll need them in a minute).
+3. Facebook may now require you to verify your account before continuing (see [here](https://developers.facebook.com/blog/post/386/) for more information).
+4. Once your app has been created, fill in your "Site URL" under "Select how your app integrates with Facebook -&gt; Website".  Note: http://example.com/ and http://www.example.com/ are *not* the same.
+5. Click "Save Changes," and note the App ID and Secret (you'll need them in a minute).
 
 Then you can install the plugin:
 
 1. Download the latest version from [here](http://wordpress.org/extend/plugins/wp-fb-autoconnect/), unzip it, and upload the extracted files to your plugins directory.
 2. Login to your Wordpress admin panel and activate the plugin.
 3. Navigate to Settings -> WP-FB AutoConn.
-4. Enter your Application's API Key and Secret (obtained above), and click "Save."
+4. Enter your App ID and Secret (obtained above), and click "Save."
 5. If you're using BuddyPress, a Facebook button will automatically be added to its built-in login panel.  If not, navigate to Appearance -&gt; Widgets and add the WP-FB AutoConnect widget to your sidebar. 
 
 That's it - users should now be able to use the widget to login to your blog with their Facebook accounts.
@@ -59,6 +60,63 @@ For more information on exactly how this plugin's login process works and how it
 
 
 == Changelog ==
+= 2.3.1 (2012/07/21) =
+* Fix a rare bug with avatar fetching
+
+= 2.3.0 (2012/02/22) =
+* Major performance improvement: logins should now be substantially faster on sites with large user databases.
+
+= 2.2.2 (2012/02/22) =
+* Update version compatibility number
+* The 'Failed to get the Facebook User Session' error now refers to a specific FAQ.
+* Add support for debugging memory usage and execution time (via the email logs)
+* Combine Admin notices into one action
+* Update the admin panel's premium teaser to include newly-added features
+
+= 2.2.1 (2012/01/10) =
+* Add an admin panel check to warn users whose servers don't have CURL installed
+* Add an admin panel check to warn users whose servers dont have JSON installed
+* Add a new tab to the admin panel with "Support Info" (to include when reporting a bug/issue)
+
+= 2.2.0 (2011-12-17) =
+* Nonce fix to resolve a conflict with Buddypress Groups, and potential validation issues with other plugins that use the default nonce name/action (thanks gbellucci!)
+* Check for compatibility with WP3.3
+
+= 2.1.9 (2011-12-13) =
+* Removed an old (now unused) database option that was getting written on every pageload (thanks Aaron Frerichs!)
+
+= 2.1.8 (2011-11-28) =
+* Removed plugin sponsorship messages.  See [Automattic Bullies WordPress Plugin Developers -- Again](http://gregsplugins.com/lib/2011/11/26/automattic-bullies/).
+
+= 2.1.7 (2011-11-25) =
+* Fix: wpfb_extended_permissions filter was not being applied if neither "post to wall" nor "request email" options were checked.
+* Add new BuddyPress XProfile mapping to the premium admin panel
+
+= 2.1.6 (2011-11-24) =
+* All new TABBED Admin panel!
+* Better error reporting for "wp_insert_user failed"
+* Add a note to the "Delete All Options" section of the admin panel
+* Eliminate old admin panel code related to updating .htaccess rules for autologin
+* Fix: Username style was defaulting to the legacy format on Buddypress
+* Fix: Admin panel was not properly showing when the new username format is selected
+
+= 2.1.5 (2011-11-22) =
+* The "Buddypress-Friendly" username format (First.Last) seems to create issues with author links in Wordpress, so I've added a new "First_Last" option (and left the old option there for legacy support only).  If you have multiple authors and are using the "First.Last" format, you may want to change your username format. 
+
+= 2.1.4 (2011-11-16) =
+* Move the Wall Announcement code into a filter, so it can be removed/replaced/customized if desired
+* Update WP compatibility number
+
+= 2.1.3 (2011-11-15) =
+* Fixed a bug where the plugin was incorrectly stripping some language_attributes, causing problems for rtl languages.
+
+= 2.1.2 (2011-11-08) =
+* Eliminate the outdated xd_receiver.htm file
+* Eliminate the outdated validate_php5.php file
+* Update the instructions for creating an app (Facebook has changed things around yet again)
+* Use https instead of http in channel.html to prevent insecure content warning
+* Fix "wp_insert_user failed" bug (since 2.1.0)
+
 = 2.1.1 (2011-10-29) =
 * Fix a critical bug introduced in 2.1.0: not prompting for e-mail *could* result in false user account matches (i.e. logging someone in as someone else).  Please update now!
 * Replace deprecated get_settings() with get_option()

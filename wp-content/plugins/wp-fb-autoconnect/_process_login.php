@@ -6,7 +6,7 @@
   */
 
 //A very simple check to avoid people from accessing this script directly.
-if( !isset($_POST['redirectTo']) || !isset($_POST['_wpnonce']) )
+if( !isset($_POST['redirectTo']) )
     die("Please do not access this script directly.");
 
 //Make sure we're using PHP5
@@ -16,6 +16,7 @@ if(version_compare('5', PHP_VERSION, ">"))
 //Include our options and the Wordpress core
 require_once("__inc_wp.php");
 require_once("__inc_opts.php");
+jfb_debug_checkpoint('start');
 
 //If present, include the Premium addon
 @include_once(realpath(dirname(__FILE__))."/../WP-FB-AutoConnect-Premium.php");
@@ -31,7 +32,7 @@ do_action('wpfb_prelogin');
 //Check the nonce to make sure this was a valid login attempt (unless the user has disabled nonce checking)
 if( !get_option($opt_jfb_disablenonce) )
 {
-    if( wp_verify_nonce ($_REQUEST['_wpnonce'], $jfb_nonce_name) != 1 )
+    if( wp_verify_nonce ($_REQUEST[$jfb_nonce_name], $jfb_nonce_name) != 1 )
     {
         //If there's already a user logged in, tell the user and give them a link back to where they were.
         $currUser = wp_get_current_user(); 
@@ -83,11 +84,11 @@ else
 
 
 //Connect to FB and make sure we've got a valid session (we should already from the cookie set by JS)  
-$jfb_log .= "FB: Initiating Facebook connection via the new API...\n";
+$jfb_log .= "FB: Initiating Facebook connection...\n";
 $facebook = new Facebook(array('appId'=>get_option($opt_jfb_app_id), 'secret'=>get_option($opt_jfb_api_sec), 'cookie'=>true ));
 try                              { $fb_uid = $facebook->getUser(); }
 catch (FacebookApiException $e)  { j_die("Error: Exception when getting the Facebook userid. Please verify your API Key and Secret."); }
-if (!$fb_uid)                    { j_die("Error: Failed to get the Facebook user session. This is usually due to a temporary problem with Facebook's servers; please try again later."); } 
+if (!$fb_uid)                    { j_die("Error: Failed to get the Facebook user session. Please see FAQ37 on the plugin documentation page. UID: $fb_uid"); } 
 $jfb_log .= "FB: Connected to session (uid $fb_uid)\n";
 
 //Get the user info from FB
@@ -115,9 +116,14 @@ if( strlen($fbuser['email']) != 0 && strpos($fbuser['email'], 'proxymail.faceboo
     $userRevealedEmail = true;
 }
 else if( strlen($fbuser['email']) != 0 )
+{
     $jfb_log .= "FB: Email privilege granted, but only for an anonymous proxy address (" . $fbuser['email'] . ")\n";
+}
 else
-    $jfb_log .= "FB: Email priviledge denied.\n"; 
+{
+    $jfb_log .= "FB: Email priviledge denied.\n";
+    $fbuser['email'] = "FB_" . $fb_uid . $jfb_default_email;
+} 
 
 
 //Run a hook so users can`examine this Facebook user *before* letting them login.  You might use this
@@ -127,10 +133,24 @@ do_action('wpfb_connect', array('FB_ID' => $fb_uid, 'facebook' => $facebook) );
 
 
 //Examine all existing WP users to see if any of them match this Facebook user. 
-//First we check their meta: whenever a user logs in with FB, this plugin tags them with usermeta
-//so we can find them again easily.  This obviously will only work for returning FB Connect users.
-if(!isset($wp_users)) $wp_users = get_users_of_blog();
-$jfb_log .= "WP: Searching for user by meta...\n";
+//The base query for getting the users comes from get_users_from_blog(), to which I add a subquery
+//that limits results only to users who also have the appropriate facebook usermeta.
+if(!isset($wp_users))
+{
+	global $wpdb, $blog_id;
+	if ( empty($id) ) $id = (int) $blog_id;
+	$blog_prefix = $wpdb->get_blog_prefix($id);
+	$sql = "SELECT user_id, user_id AS ID, user_login, display_name, user_email, meta_value ".
+		   "FROM $wpdb->users, $wpdb->usermeta ".
+		   "WHERE {$wpdb->users}.ID = {$wpdb->usermeta}.user_id AND meta_key = '{$blog_prefix}capabilities' ".
+		   "AND {$wpdb->users}.ID IN (SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key = '$jfb_uid_meta_name' AND meta_value = '$fb_uid')"; 
+	$wp_users = $wpdb->get_results( $sql );
+}
+
+//Although $wp_users should only contain the one matching user (or be empty), this "loop" method of searching
+//for matching usermeta is retained for backwards compatibility with old 3rd party hooks which may've relied on it.
+//Originally, $wp_users contained the full list of users (not just those with matching usermeta).
+$jfb_log .= "WP: Searching " . count($wp_users) . " existing candidates by meta...\n";
 foreach ($wp_users as $wp_user)
 {
     $meta_uid  = get_user_meta($wp_user->ID, $jfb_uid_meta_name, true);
@@ -215,8 +235,12 @@ if( !$user_login_id )
     $user_login_id   = wp_insert_user($user_data);
     if( is_wp_error($user_login_id) )
     {
-        $jfb_log .= "WP: Error creating user: " . $user_login_id->get_error_message() . "\n";
-        j_die("Error: wp_insert_user failed!<br/><br/>If you get this error while running a Wordpress MultiSite installation, it means you'll need to purchase the <a href=\"$jfb_homepage#premium\">premium version</a> of this plugin to enable full MultiSite support.<br/><br/>If you're <u><i>not</i></u> using MultiSite, please report this bug to the plugin author on the support page <a href=\"$jfb_homepage#feedback\">here</a>.");        
+        j_die("Error: wp_insert_user failed!<br/><br/>".
+              "If you get this error while running a Wordpress MultiSite installation, it means you'll need to purchase the <a href=\"$jfb_homepage#premium\">premium version</a> of this plugin to enable full MultiSite support.<br/><br/>".
+              "If you're <u><i>not</i></u> using MultiSite, please report this bug to the plugin author on the support page <a href=\"$jfb_homepage#feedback\">here</a>.<br /><br />".
+              "Error message: " . (function_exists(array(&$user_login_id,'get_error_message'))?$user_login_id->get_error_message():"Undefined") . "<br />".
+              "WP_ALLOW_MULTISITE: " . (defined('WP_ALLOW_MULTISITE')?constant('WP_ALLOW_MULTISITE'):"Undefined") . "<br />".
+              "is_multisite: " . (function_exists('is_multisite')?is_multisite():"Undefined"));
     }
     
     //Success! Notify the site admin.
@@ -225,20 +249,6 @@ if( !$user_login_id )
     
     //Run an action so i.e. usermeta can be added to a user after registration
     do_action('wpfb_inserted_user', array('WP_ID' => $user_login_id, 'FB_ID' => $fb_uid, 'facebook' => $facebook, 'WP_UserData' => $user_data) );
-
-    //If the option was selected and permission exists, publish an announcement about the user's registration to their wall
-    if( get_option($opt_jfb_ask_stream) )
-    {
-        try
-        {
-            $jfb_log .= "FB: Publishing registration news to user's wall.\n";
-            $facebook->api('/me/feed/', 'post', array('access_token' => $facebook->access_token, 'message' => get_option($opt_jfb_stream_content)));
-        }
-        catch (FacebookApiException $e)
-        {
-            $jfb_log .= "WARNING: Failed to publish to the user's wall (is your message too long?) (" . $e . ")\n";
-        }
-    }
 }
 
 //Tag the user with our meta so we can recognize them next time, without resorting to email hashes
@@ -248,9 +258,13 @@ $jfb_log .= "WP: Updated usermeta ($jfb_uid_meta_name)\n";
 //Also store the user's facebook avatar(s), in case the user wants to use them later
 if( $fbuser['pic_square'] )
 {
-    update_user_meta($user_login_id, 'facebook_avatar_thumb', $fbuser['pic_square']);
-    update_user_meta($user_login_id, 'facebook_avatar_full', $fbuser['pic_big']);
-    $jfb_log .= "WP: Updated avatars (" . $fbuser['pic_square'] . ")\n";
+    if( isset($fbuser['pic_square']['data']['url']) ) $avatarThumb = $fbuser['pic_square']['data']['url']; 
+	else 											  $avatarThumb = $fbuser['pic_square'];
+    if( isset($fbuser['pic_big']['data']['url']) )    $avatarFull = $fbuser['pic_big']['data']['url'];
+	else 											  $avatarFull = $fbuser['pic_big'];
+	update_user_meta($user_login_id, 'facebook_avatar_full', $avatarFull);
+	update_user_meta($user_login_id, 'facebook_avatar_thumb', $avatarThumb);
+	$jfb_log .= "WP: Updated avatars (" . $avatarThumb . ")\n";
 }
 else
 {
