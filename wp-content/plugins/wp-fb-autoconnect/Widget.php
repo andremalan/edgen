@@ -26,14 +26,17 @@ class Widget_LoginLogout extends WP_Widget
         //If logged in, show "Welcome, User!"
         if( is_user_logged_in() ):
         ?>
-            <div style='text-align:center'>
+            <div style='text-align:center; font-size: 17px'>
               <?php 
                 $userdata = wp_get_current_user();
                 echo __('Welcome') . ', ' . $userdata->display_name;
               ?>!<br />
-              <small>
-                <a href="<?php echo get_option('siteurl')?>/wp-admin/profile.php"><?php _e("Edit Profile")?></a> | <a href=" <?php echo wp_logout_url( $_SERVER['REQUEST_URI'] )?>"><?php _e("Logout")?></a>
-              </small>
+              <?php 
+                //ideahack making this go to a user profile not their edit page.
+                
+                  $the_url = bp_core_get_user_domain( $userdata ->ID );
+              ?>
+                <a href="<?php echo $the_url?>">View Profile</a> | <a href=" <?php echo wp_logout_url( $_SERVER['REQUEST_URI'] )?>"><?php _e("Logout")?></a>
             </div>
         <?php
         //Otherwise, show the login form (with Facebook Connect button)
