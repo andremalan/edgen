@@ -871,7 +871,6 @@ if ( ! function_exists( 'display_slideShow' ) ) :
 								<div id='student_name'><strong>Name: </strong>$name</div>
 								<div id='country'><strong>Country:</strong> $country</div>
 								<div id='areaofstudy'><strong>Area of Study: </strong> $area_of_study</div>
-								<div id='age'><strong>Age: </strong> $student_age</div>
 								<div id='featured_excerpt'>$excerpt</div>
 								<div id='deadline'><strong>Funding Deadline:</strong>  $funding_deadline </div>
 								<div id='donate'>
