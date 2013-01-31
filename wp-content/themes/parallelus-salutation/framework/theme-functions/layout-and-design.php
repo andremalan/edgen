@@ -1922,4 +1922,3 @@ if ( ! function_exists( 'theme_body_class' ) ) :
 endif;
 
 
-?>

@@ -12,9 +12,9 @@ add_shortcode('list_all_subpages', 'ih_list_all_subpages');
 
 // ideahack redirecting students page to search page.
 
-add_action('get_header', 'ih_redirect_students');
-add_action('get_header', 'ih_redirect_gift_cards');
-add_action('get_header', 'ih_redirect_partners');
+add_action('pre_get_posts', 'ih_redirect_students');
+add_action('pre_get_posts', 'ih_redirect_gift_cards');
+add_action('pre_get_posts', 'ih_redirect_partners');
 
 function get_student_id($old_id) {
      $args = array(    

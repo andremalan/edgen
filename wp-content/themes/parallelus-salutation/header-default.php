@@ -32,6 +32,8 @@ wp_head();
 <?php // jQuery fallback. Will load a local copy if WP Head fails to load. ?>
 <script>!window.jQuery && document.write(unescape('%3Cscript src="<?php echo $jsPath; ?>libs/jquery-1.6.2.min.js"%3E%3C/script%3E'))</script>
 
+<!--<script type="text/javascript" src="/wp-content/themes/parallelus-salutation/includes/js-head.js"></script>-->
+
 <!--[if lte IE 8]>
 <link rel="stylesheet" type="text/css" href="<?php echo $cssPath; ?>ie.css" />
 <![endif]-->
@@ -63,12 +65,18 @@ if ($customCSS = get_theme_var('design_setting,css_custom')) :
 	echo prep_content($customCSS); 
 endif;
 ?>
-</style> <?php 
+</style>
 
- 
+<?php 
+
 // Custom JavaScript entered in design settings
 if ($customJS = get_theme_var('design_setting,js_custom')) : ?>
-<script type="text/javascript">
-	<?php echo prep_content($customJS); ?>
-</script>
-<?php endif; ?>
+
+	<script type="text/javascript">
+        <?php echo prep_content($customJS); ?>
+    </script>
+
+<?php 
+
+endif;
+?>

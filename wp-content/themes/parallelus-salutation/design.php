@@ -6,11 +6,13 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 <head>
+<!--test-->
 	<?php get_header('default'); ?>
+
+<!--end teset-->
 </head>
 
 <body <?php body_class(); ?>>
-
 <div id="Wrapper">
 	<?php
 	

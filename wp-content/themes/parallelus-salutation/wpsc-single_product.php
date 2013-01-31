@@ -10,7 +10,11 @@
 ?>
 
 <div id="single_product_page_container">
-	
+	<div id="confirm-add">
+       <div class="left">You just added <strong><?php echo wpsc_the_product_title(); ?></strong> to your potential contributions list.</div>
+       <div class="right"><a href="/students">Donate to another student</a> | <a href="/students/checkout/">Checkout</a></div>
+    
+    </div>
 	<?php
 		// Breadcrumbs
 		wpsc_output_breadcrumbs();

@@ -988,13 +988,17 @@ ol.posts-list .item-container { display: block; }
 	.widget .content-post-list .entry-title			{ font-size: 14px; line-height: 1; }
 /* Page styles (and post single) */
 	.content-post-single .entry-header, .content-page .entry-header { margin-bottom: 25px; }
-	.content-post-single .entry-header .entry-title, .content-page .entry-header .entry-title { margin: 0 0 4px; padding: 0; }
+	.content-post-single .entry-header .entry-title, .content-page .entry-header .entry-title { margin: 0 10px 4px; padding: 0; }
 	.content-post-single .entry-header .post-header-info .published { float: none; }
 /* posts without images */
 	.content-post-list .noImage .the-post-container { margin-left: 0; }	
 		/* Post Content  - Remove top margins on first heading tag in page/post content areas (and BP areas) */
 			.entry-content h1:first-child, .entry-content h2:first-child, .entry-content h3:first-child, .entry-content h4:first-child, .entry-content h5:first-child, .entry-content h6:first-child,
-			#BP-Content h1:first-child, #BP-Content h2:first-child, #BP-Content h3:first-child, #BP-Content h4:first-child, #BP-Content h5:first-child, #BP-Content h6:first-child { margin-top: 0; }
+			#BP-Content h1:first-child, #BP-Content h2:first-child, #BP-Content h3:first-child, #BP-Content h4:first-child, #BP-Content h5:first-child, #BP-Content h6:first-child { margin: 0; }
+			
+			.entry-content h2:first-child {
+				margin:0 0 0 10px;
+			}
 
 /* Avatars
 ---------------------------------------------- */
@@ -1209,3 +1213,25 @@ li.portfolio-item .item-container { clear: left; margin-bottom: 2em; }
 	.widget_bp_core_whos_online_widget .avatar-block { padding: 18px 5px 2px; text-align: center; display: block; }
 	.widget_bp_core_recently_active_widget .avatar-block .item-avatar,
 	.widget_bp_core_whos_online_widget .avatar-block .item-avatar { display: block; zoom: 1; display: inline-block; float: none; text-align: center; margin: 0 3% 15px; }
+	
+/* NEW STYELS ADDED BY JODY */
+
+#confirm-add {
+	display:none;
+	background:#fcdda0;
+	width:612px;
+	height:10px;
+	padding:20px;
+	margin:10px;
+}
+#confirm-add .left {
+	float:left;
+	wiidth:300px;
+}
+#confirm-add .right {
+	float:right;
+}
+
+/* OVERRIDE 
+
+#fancy_notification { visibility: hidden }*/

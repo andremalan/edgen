@@ -532,7 +532,6 @@ body.bp-adminbar, body.logged-in {
     padding: 25px;
     margin-left: 30px;
     margin-bottom: 30px;
-	box-shadow: 2px 2px 3px #888;
     margin: 0 15px 30px 30px;
 	width: 260px;	
 }

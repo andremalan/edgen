@@ -2324,4 +2324,3 @@ function __checked_selected_helper( $helper, $current, $echo, $type ) {
 	return $result;
 }
 
-?>

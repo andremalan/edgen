@@ -357,6 +357,3 @@ function _ti_isSubtrace($trace1, $trace2) { // is trace1 a subtrace of trace2
 	}
 	return true;
 }
-
-
-?>
