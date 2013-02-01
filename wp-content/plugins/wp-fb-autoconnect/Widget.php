@@ -43,7 +43,7 @@ class Widget_LoginLogout extends WP_Widget
         else:
           //ideahack hide the login form we are using our own.
         ?>
-<div style="position:relative; margin-top: -14px;">
+<div style="position:relative; margin-top: -14px;"></div>
             <?php
             global $opt_jfb_hide_button;
             if( !get_option($opt_jfb_hide_button) )
@@ -53,7 +53,7 @@ class Widget_LoginLogout extends WP_Widget
                 //jfb_output_facebook_callback(); This is output in wp_footer as of 1.9.0
             }
         endif;
-           ?> </div> <?php
+           ?>  <?php
         echo $after_widget;
     }
     
